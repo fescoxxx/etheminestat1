@@ -37,7 +37,7 @@ public interface WorkersContract {
             void onFailure(Throwable t);
         }
 
-        void getPayouts(OnFinishedListener onFinishedListener,
+        void getWorkers(OnFinishedListener onFinishedListener,
                         DataDatabase database,
                         Context context);
     }

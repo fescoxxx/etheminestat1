@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.rijsoft.ethermine.etherminestats.database.DataDatabase;
-import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
 import com.rijsoft.ethermine.etherminestats.model.payouts.Payouts;
 
 public class PayoutsSaveIntoDatabase extends AsyncTask<Payouts, Void, Void> {

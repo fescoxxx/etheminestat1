@@ -14,6 +14,7 @@ import com.rijsoft.ethermine.etherminestats.contracts.PayoutsContract;
 import com.rijsoft.ethermine.etherminestats.contracts.WorkersContract;
 import com.rijsoft.ethermine.etherminestats.database.currenStats.CurrentStatsFetcher;
 import com.rijsoft.ethermine.etherminestats.database.payouts.PayoutsFetcher;
+import com.rijsoft.ethermine.etherminestats.database.workers.WorkersFetcher;
 import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
 import com.rijsoft.ethermine.etherminestats.model.payouts.Payouts;
 import com.rijsoft.ethermine.etherminestats.model.workers.Workers;
@@ -137,8 +138,8 @@ public class DataDatabase extends SQLiteOpenHelper {
 
     //получение данных из БД o Workers
     public void getWorkersFromDataBase(WorkersContract.GetWorkersIntractor.OnFinishedListener onFinishedListener){
-    //    WorkersFetcher fetcher = new WorkersFetcher(onFinishedListener,this.getWritableDatabase());
-     //   fetcher.start();
+        WorkersFetcher fetcher = new WorkersFetcher(onFinishedListener,this.getWritableDatabase());
+        fetcher.start();
     }
 
     //получение данных из БД о выплатах

@@ -19,7 +19,7 @@ public class PayoutsFetcher extends Thread {
                                        onFinishedListener,
                                SQLiteDatabase db) {
         this.onFinishedListener = onFinishedListener;
-        mDb = db;
+        this.mDb = db;
     }
     @Override
     public void run() {
@@ -35,9 +35,7 @@ public class PayoutsFetcher extends Thread {
                                     cursorData.getColumnIndex(
                                             Constants.DATABASE.PAYOUTS_JSON_BODY)),
                             Payouts.class);
-
                     publishData(payouts);
-
                 } while (cursorData.moveToNext());
             }
         }
