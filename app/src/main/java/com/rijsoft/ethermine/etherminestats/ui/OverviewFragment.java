@@ -49,8 +49,6 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
     private OnFragmentInteractionListener mListener;
 
     private ProgressBar progressBar;
-    private RecyclerView recyclerView;
-
     private OverviewContract.presenter presenter;
 
     public OverviewFragment() {
@@ -111,7 +109,6 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
         RelativeLayout.LayoutParams params = new
                 RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         progressBar.setVisibility(View.INVISIBLE);
-
         getActivity().addContentView(relativeLayout, params);
     }
 
@@ -131,19 +128,6 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-    }
-
-    //Here you can restore saved data in onSaveInstanceState Bundle
-    private void onRestoreInstanceState(Bundle savedInstanceState){
-        if(savedInstanceState!=null){
-            currentStats = (CurrentStats ) savedInstanceState.getSerializable("currentStats");
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(final Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable("currentStats", (Serializable) currentStats);
     }
 
     @Override

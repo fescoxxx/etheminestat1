@@ -67,6 +67,6 @@ public class Data {
     @Override
     public String toString()
     {
-        return "ClassPojo [amount = "+amount+", start = "+start+", txHash = "+txHash+", paidOn = "+paidOn+", end = "+end+"]";
+        return "{\"amount\" : "+amount+", \"start\" : "+start+", \"txHash\" : "+ "\""+txHash+"\""+", \"paidOn\" : "+paidOn+", \"end\" : "+end+"}";
     }
 }

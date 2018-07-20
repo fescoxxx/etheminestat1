@@ -32,8 +32,6 @@ public class CurrentStatsFetcher extends Thread {
                 do {
                     Gson gson = new Gson();
                     // Convert JSON to Java Object
-                  //  orderCard = gson.fromJson(cursorData.getString(cursorData.getColumnIndex(Constants.DATABASE.JSON_ORDER_CARD)), OrderCard.class);
-
                     // Convert JSON to JsonElement, and later to String
                     CurrentStats currentStats = gson.fromJson(
                             cursorData.getString(

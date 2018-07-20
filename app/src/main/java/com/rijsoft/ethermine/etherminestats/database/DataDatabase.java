@@ -10,7 +10,9 @@ import android.util.Log;
 
 import com.rijsoft.ethermine.etherminestats.Constants;
 import com.rijsoft.ethermine.etherminestats.contracts.OverviewContract;
+import com.rijsoft.ethermine.etherminestats.contracts.PayoutsContract;
 import com.rijsoft.ethermine.etherminestats.database.currenStats.CurrentStatsFetcher;
+import com.rijsoft.ethermine.etherminestats.database.payouts.PayoutsFetcher;
 import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
 import com.rijsoft.ethermine.etherminestats.model.payouts.Payouts;
 
@@ -118,7 +120,10 @@ public class DataDatabase extends SQLiteOpenHelper {
     }
 
     //получение данных из БД о выплатах
-
+    public void getPayoutsFromDataBase(PayoutsContract.GetPayoutsIntractor.OnFinishedListener onFinishedListener){
+        PayoutsFetcher fetcher = new PayoutsFetcher(onFinishedListener, this.getWritableDatabase());
+        fetcher.start();
+    }
 
     //получение данных из БД о текущей статистики
     public void getCurrentStatsFromDataBase(OverviewContract.GetDashboardIntractor.OnFinishedListener onFinishedListener) {

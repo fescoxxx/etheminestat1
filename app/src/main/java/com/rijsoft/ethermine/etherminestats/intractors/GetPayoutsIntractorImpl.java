@@ -6,6 +6,7 @@ import android.util.Log;
 import com.rijsoft.ethermine.etherminestats.Preferences;
 import com.rijsoft.ethermine.etherminestats.contracts.PayoutsContract;
 import com.rijsoft.ethermine.etherminestats.database.DataDatabase;
+import com.rijsoft.ethermine.etherminestats.database.payouts.PayoutsSaveIntoDatabase;
 import com.rijsoft.ethermine.etherminestats.model.payouts.Payouts;
 import com.rijsoft.ethermine.etherminestats.remote.RetrofitClient;
 import com.rijsoft.ethermine.etherminestats.service.ApiService;
@@ -37,9 +38,9 @@ public class GetPayoutsIntractorImpl implements PayoutsContract.GetPayoutsIntrac
                 if (response.body().getStatus().equals("OK")) {
                     onFinishedListener.onFinished(response.body());
                     preferences.updateDateLife(LIFE_TIME_PAYOUTS);
-                    //    database.clearDataBase();
-                    //    CurrentStatsSaveIntoDatabase task = new CurrentStatsSaveIntoDatabase(database);
-                    //    task.execute(response.body());
+                    database.clearPayouts();
+                    PayoutsSaveIntoDatabase task = new PayoutsSaveIntoDatabase(database);
+                    task.execute(response.body());
                     } else {
                         onFinishedListener.onFailure(new Throwable("Error loading data. Check your account settings"));
                     }

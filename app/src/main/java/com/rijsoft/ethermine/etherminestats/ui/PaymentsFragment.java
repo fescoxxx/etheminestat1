@@ -1,16 +1,26 @@
 package com.rijsoft.ethermine.etherminestats.ui;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.rijsoft.ethermine.etherminestats.R;
+import com.rijsoft.ethermine.etherminestats.contracts.PayoutsContract;
+import com.rijsoft.ethermine.etherminestats.intractors.GetPayoutsIntractorImpl;
+import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
+import com.rijsoft.ethermine.etherminestats.model.payouts.Payouts;
+import com.rijsoft.ethermine.etherminestats.presenters.PayoutsPresentrImpl;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,7 +30,7 @@ import com.rijsoft.ethermine.etherminestats.R;
  * Use the {@link PaymentsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PaymentsFragment extends Fragment {
+public class PaymentsFragment extends Fragment implements PayoutsContract.MainView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,6 +40,10 @@ public class PaymentsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private Payouts payouts;
+    private ProgressBar progressBar;
+    private PayoutsContract.presenter presenter;
+    
     private OnFragmentInteractionListener mListener;
 
     public PaymentsFragment() {
@@ -59,6 +73,33 @@ public class PaymentsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        initializeView();
+        initProgressBar();
+        showProgress();
+        presenter = new PayoutsPresentrImpl(this, new GetPayoutsIntractorImpl(),
+                getActivity());
+        presenter.requestDataFromServer();
+    }
+
+    private void initProgressBar() {
+        progressBar = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleLarge);
+        progressBar.getIndeterminateDrawable()
+                .setColorFilter(Color.parseColor("#DF691A"),
+                        android.graphics.PorterDuff.Mode.MULTIPLY);
+        progressBar.setIndeterminate(true);
+
+        RelativeLayout relativeLayout = new RelativeLayout(getActivity());
+        relativeLayout.setGravity(Gravity.CENTER);
+        relativeLayout.addView(progressBar);
+
+        RelativeLayout.LayoutParams params = new
+                RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        progressBar.setVisibility(View.INVISIBLE);
+        getActivity().addContentView(relativeLayout, params);
+    }
+
+    private void initializeView() {
     }
 
     @Override
@@ -91,6 +132,29 @@ public class PaymentsFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void setDataToShow(Payouts payouts) {
+        this.payouts = payouts;
+        Log.d("payouts ",payouts.getStatus());
+    }
+
+    @Override
+    public void onResponseFailure(Throwable throwable) {
+        Toast.makeText(getActivity(),
+                "Something went wrong...Error message: " + throwable.getMessage(),
+                Toast.LENGTH_LONG).show();
+    }
+
     /**
      * <p>
      * See the Android Training lesson <a href=
@@ -107,6 +171,7 @@ public class PaymentsFragment extends Fragment {
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
             Log.d("refreshpay","refresh_payments");
+            presenter.onRefreshButtonClick();
         }
         return super.onOptionsItemSelected(item);
     }
