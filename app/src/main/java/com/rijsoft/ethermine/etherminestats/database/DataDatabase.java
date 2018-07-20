@@ -12,6 +12,7 @@ import com.rijsoft.ethermine.etherminestats.Constants;
 import com.rijsoft.ethermine.etherminestats.contracts.OverviewContract;
 import com.rijsoft.ethermine.etherminestats.database.currenStats.CurrentStatsFetcher;
 import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
+import com.rijsoft.ethermine.etherminestats.model.payouts.Payouts;
 
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -28,6 +29,9 @@ public class DataDatabase extends SQLiteOpenHelper {
         try {
             Log.d(TAG, Constants.DATABASE.CREATE_TABLE_CURRENT_STATS);
             sqLiteDatabase.execSQL(Constants.DATABASE.CREATE_TABLE_CURRENT_STATS);
+            sqLiteDatabase.execSQL(Constants.DATABASE.CREATE_TABLE_PAYOUTS);
+            sqLiteDatabase.execSQL(Constants.DATABASE.CREATE_TABLE_SETTINGS);
+            sqLiteDatabase.execSQL(Constants.DATABASE.CREATE_TABLE_WORKERS);
         } catch (SQLException ex) {
             Log.d(TAG, ex.getMessage());
         }
@@ -38,12 +42,16 @@ public class DataDatabase extends SQLiteOpenHelper {
         try {
             Log.d(TAG, Constants.DATABASE.DROP_CURRENT_STATS);
             sqLiteDatabase.execSQL(Constants.DATABASE.DROP_CURRENT_STATS);
+            sqLiteDatabase.execSQL(Constants.DATABASE.DROP_PAYOUTS);
+            sqLiteDatabase.execSQL(Constants.DATABASE.DROP_SETTINGS);
+            sqLiteDatabase.execSQL(Constants.DATABASE.DROP_WORKERS);
         } catch (SQLException ex) {
             Log.d(TAG, ex.getMessage());
         }
     }
 
-    public void clearDataBase() {
+    //отчистка таблицы текущей статистики
+    public void clearCurrentStats() {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
             db.execSQL(Constants.DATABASE.DELETE_CURRENT_STATS);
@@ -52,27 +60,77 @@ public class DataDatabase extends SQLiteOpenHelper {
         }
     }
 
+    //очистка таблицы с выплатами
+    public void clearPayouts() {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL(Constants.DATABASE.DELETE_PAYOUTS);
+        } catch (SQLException ex) {
+            Log.d(TAG, ex.getMessage());
+        }
+    }
+
+    //очистка таблицы с настройками
+    public void clearSettings() {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL(Constants.DATABASE.DELETE_SETTINGS);
+        } catch (SQLException ex) {
+            Log.d(TAG, ex.getMessage());
+        }
+    }
+
+    //очистка таблицы с настройками
+    public void clearWorkers() {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL(Constants.DATABASE.DELETE_WORKERS);
+        } catch (SQLException ex) {
+            Log.d(TAG, ex.getMessage());
+        }
+    }
+
+    //Вствака данных в БД текущей статистики
     public void insertIntoCurrentStats(CurrentStats currentStats) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues valuesDatas = new ContentValues();
         valuesDatas.put(Constants.DATABASE.CURRENT_STATS_JSON_BODY, currentStats.toString());
-        int addMinuteTime = 1;
-        Date targetTime = new Date(); //now
-        targetTime = DateUtils.addMinutes(targetTime, addMinuteTime); //add minute
-        valuesDatas.put(Constants.DATABASE.CURRENT_STATS_TIME_LIFE, targetTime.toString());
-
+        valuesDatas.put(Constants.DATABASE.CURRENT_STATS_TIME_LIFE, getAddMinuteDate().toString());
         try {
-            Log.d(TAG, currentStats.toString());
             db.insert(Constants.DATABASE.TABLE_NAME_CURRENT_STATS, null, valuesDatas);
         } catch (Exception e) {
             Log.d(TAG, e.fillInStackTrace().toString());
         }
     }
 
+    //Вставка данных в БД выплаты
+    public void insertIntoPayouts(Payouts payouts){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues valuesDatas = new ContentValues();
+        valuesDatas.put(Constants.DATABASE.PAYOUTS_JSON_BODY, payouts.toString());
+        valuesDatas.put(Constants.DATABASE.PAYOUTS_TIME_LIFE,getAddMinuteDate().toString());
+        try {
+            Log.d(TAG, payouts.toString());
+            db.insert(Constants.DATABASE.TABLE_NAME_PAYOUTS, null, valuesDatas);
+        } catch (Exception e) {
+            Log.d(TAG, e.fillInStackTrace().toString());
+        }
+    }
 
+    //получение данных из БД о выплатах
+
+
+    //получение данных из БД о текущей статистики
     public void getCurrentStatsFromDataBase(OverviewContract.GetDashboardIntractor.OnFinishedListener onFinishedListener) {
         CurrentStatsFetcher fetcher = new CurrentStatsFetcher(onFinishedListener, this.getWritableDatabase());
         fetcher.start();
+    }
+
+    private Date getAddMinuteDate() {
+        int addMinuteTime = 1;
+        Date targetTime = new Date(); //now
+        targetTime = DateUtils.addMinutes(targetTime, addMinuteTime); //add minute
+        return targetTime;
     }
 
 }
