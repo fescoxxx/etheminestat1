@@ -5,6 +5,7 @@ import com.rijsoft.ethermine.etherminestats.model.dashboard.Dashboard;
 import com.rijsoft.ethermine.etherminestats.model.history.History;
 import com.rijsoft.ethermine.etherminestats.model.payouts.Payouts;
 import com.rijsoft.ethermine.etherminestats.model.settings.Settings;
+import com.rijsoft.ethermine.etherminestats.model.workers.Workers;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -26,4 +27,7 @@ public interface ApiService {
 
     @GET("/miner/{miner}/payouts")
     Call<Payouts> getPayouts(@Path("miner") String miner);
+
+    @GET("/miner/{miner}/workers")
+    Call<Workers> getWorkers(@Path("miner") String miner);
 }

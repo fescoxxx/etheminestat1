@@ -52,7 +52,7 @@ public class GetOverviewIntractorImpl implements OverviewContract.GetDashboardIn
                     task.execute(response.body());
                 } else {
                     onFinishedListener.onFailure(new Throwable("Error loading data. Check your account settings"));
-                };
+                }
             }
 
             @Override

@@ -11,10 +11,12 @@ import android.util.Log;
 import com.rijsoft.ethermine.etherminestats.Constants;
 import com.rijsoft.ethermine.etherminestats.contracts.OverviewContract;
 import com.rijsoft.ethermine.etherminestats.contracts.PayoutsContract;
+import com.rijsoft.ethermine.etherminestats.contracts.WorkersContract;
 import com.rijsoft.ethermine.etherminestats.database.currenStats.CurrentStatsFetcher;
 import com.rijsoft.ethermine.etherminestats.database.payouts.PayoutsFetcher;
 import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
 import com.rijsoft.ethermine.etherminestats.model.payouts.Payouts;
+import com.rijsoft.ethermine.etherminestats.model.workers.Workers;
 
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -117,6 +119,26 @@ public class DataDatabase extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.d(TAG, e.fillInStackTrace().toString());
         }
+    }
+
+    //Вставка данных в БД Workers
+    public void insertIntoWorkers(Workers workers) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues valuesDatas = new ContentValues();
+        valuesDatas.put(Constants.DATABASE.WORKERS_JSON_BODY, workers.toString());
+        valuesDatas.put(Constants.DATABASE.WORKERS_TIME_LIFE,getAddMinuteDate().toString());
+        try {
+            Log.d(TAG, workers.toString());
+            db.insert(Constants.DATABASE.TABLE_NAME_WORKERS, null, valuesDatas);
+        } catch (Exception e) {
+            Log.d(TAG, e.fillInStackTrace().toString());
+        }
+    }
+
+    //получение данных из БД o Workers
+    public void getWorkersFromDataBase(WorkersContract.GetWorkersIntractor.OnFinishedListener onFinishedListener){
+    //    WorkersFetcher fetcher = new WorkersFetcher(onFinishedListener,this.getWritableDatabase());
+     //   fetcher.start();
     }
 
     //получение данных из БД о выплатах
