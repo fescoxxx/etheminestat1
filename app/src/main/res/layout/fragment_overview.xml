@@ -6,9 +6,237 @@
     tools:context=".ui.OverviewFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
+        android:id="@+id/biglayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Overview" />
+        android:background="#808080"
+        android:orientation="vertical">
 
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/one"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/reported_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#DAA520"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center_horizontal"
+                        android:text="Reported" />
+
+                    <TextView
+                        android:id="@+id/reported_gh"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#DAA520"
+                        android:fontFamily="@font/roboto"
+                        android:text="3,8 GH/s"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/report_valid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#DAA520"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Valid"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/report_procent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#DAA520"
+                        android:text="6969(69%)"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/current"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#008000"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Current"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/current_gh"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#008000"
+                        android:fontFamily="@font/roboto"
+                        android:text="3,8 GH/s"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/Current_stale"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#008000"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Stale"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/current_procent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#008000"
+                        android:fontFamily="@font/roboto"
+                        android:text="93(3,2%)"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#000000" />
+
+            <LinearLayout
+                android:id="@+id/two"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Average"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#4682B4"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Average"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/Average-GH"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#4682B4"
+                        android:fontFamily="@font/roboto"
+                        android:text="3,5 GH/s"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/Average_invalid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#4682B4"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Invalid"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/Average_procent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#4682B4"
+                        android:fontFamily="@font/roboto"
+                        android:text="9(9%)"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Workers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Workers"
+                        android:background="#FF4500"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:background="#FF4500"
+                        android:text="2,5 GH/s"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/LastSeen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:background="#FF4500"
+                        android:text="Last Seen"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/minutes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:background="#FF4500"
+                        android:text="12m"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 </FrameLayout>
