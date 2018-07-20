@@ -4,11 +4,9 @@ import android.content.Context;
 
 import com.rijsoft.ethermine.etherminestats.database.DataDatabase;
 import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
-import com.rijsoft.ethermine.etherminestats.model.dashboard.Dashboard;
+import com.rijsoft.ethermine.etherminestats.model.payouts.Payouts;
 
-import java.util.ArrayList;
-
-public interface OverviewContract {
+public interface PayoutsContract {
 
     interface presenter{
 
@@ -26,20 +24,20 @@ public interface OverviewContract {
 
         void hideProgress();
 
-        void setDataToShow(CurrentStats currentStats);
+        void setDataToShow(Payouts payouts);
 
         void onResponseFailure(Throwable throwable);
 
     }
 
-    interface GetDashboardIntractor {
+    interface GetPayoutsIntractor {
 
         interface OnFinishedListener {
-            void onFinished(CurrentStats currentStats);
+            void onFinished(Payouts payouts);
             void onFailure(Throwable t);
         }
 
-        void getOverview(OnFinishedListener onFinishedListener,
+        void getPayouts(OnFinishedListener onFinishedListener,
                          DataDatabase database,
                          Context context);
     }

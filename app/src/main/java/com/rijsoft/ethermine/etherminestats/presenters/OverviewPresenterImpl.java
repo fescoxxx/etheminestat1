@@ -1,10 +1,16 @@
 package com.rijsoft.ethermine.etherminestats.presenters;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.rijsoft.ethermine.etherminestats.Preferences;
 import com.rijsoft.ethermine.etherminestats.contracts.OverviewContract;
 import com.rijsoft.ethermine.etherminestats.database.DataDatabase;
 import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class OverviewPresenterImpl implements
         OverviewContract.presenter,
@@ -13,6 +19,7 @@ public class OverviewPresenterImpl implements
     private OverviewContract.MainView mainView;
     private OverviewContract.GetDashboardIntractor getDashboardIntractor;
     private Context context;
+    private DataDatabase mDatabase;
 
     public OverviewPresenterImpl(OverviewContract.MainView mainView,
                                  OverviewContract.GetDashboardIntractor getDashboardIntractor,
@@ -29,17 +36,35 @@ public class OverviewPresenterImpl implements
 
     @Override
     public void onRefreshButtonClick() {
-
         if(mainView != null){
             mainView.showProgress();
         }
-        getDashboardIntractor.getOverview(this,context);
+        getDashboardIntractor.getOverview(this, mDatabase, context);
     }
 
     @Override
     public void requestDataFromServer() {
-        getDashboardIntractor.getOverview(this,context);
+        mDatabase = new DataDatabase(context) ;
+        Date dateLife = new Date();
+        Preferences preferences = new Preferences(context);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        try {
+            dateLife = dateFormat.parse(preferences.getLifeTimeOverview());
+            Log.d("preferences_0", dateLife.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.d("preferences", preferences.getLifeTimeOverview());
+
+        if (dateLife.before(new Date())) {
+            getDashboardIntractor.getOverview(this, mDatabase, context);
+        } else  {
+            mDatabase.getCurrentStatsFromDataBase(this);
+        }
+
     }
+
+
 
     @Override
     public void onFinished(CurrentStats currentStats) {

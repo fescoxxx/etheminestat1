@@ -177,6 +177,6 @@ public class Data implements Serializable {
     @Override
     public String toString()
     {
-        return "ClassPojo [lastSeen = "+lastSeen+", usdPerMin = "+usdPerMin+", btcPerMin = "+btcPerMin+", averageHashrate = "+averageHashrate+", activeWorkers = "+activeWorkers+", validShares = "+validShares+", reportedHashrate = "+reportedHashrate+", unconfirmed = "+unconfirmed+", time = "+time+", invalidShares = "+invalidShares+", currentHashrate = "+currentHashrate+", coinsPerMin = "+coinsPerMin+", unpaid = "+unpaid+", staleShares = "+staleShares+"]";
+        return "{\"lastSeen\" : "+lastSeen+", \"usdPerMin\" : "+usdPerMin+", \"btcPerMin\" : "+btcPerMin+", \"averageHashrate\" : "+averageHashrate+", \"activeWorkers\" : "+activeWorkers+", \"validShares\" : "+validShares+", \"reportedHashrate\" : "+reportedHashrate+", \"unconfirmed\" : "+unconfirmed+", \"time\" : "+time+", \"invalidShares\" : "+invalidShares+", \"currentHashrate\" : "+currentHashrate+", \"coinsPerMin\" : "+coinsPerMin+", \"unpaid\" : "+unpaid+", \"staleShares\" : "+staleShares+"}";
     }
 }

@@ -33,6 +33,6 @@ public class CurrentStats implements Serializable{
     @Override
     public String toString()
     {
-        return "ClassPojo [status = "+status+", data = "+data+"]";
+        return "{\"status\" : "+ "\""+status+"\""+", \"data\": "+data+"}";
     }
 }

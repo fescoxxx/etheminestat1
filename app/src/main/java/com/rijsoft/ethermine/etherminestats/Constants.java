@@ -21,6 +21,8 @@ public class Constants {
 
         public static final String GET_CURRENT_STATS = "SELECT * FROM " + TABLE_NAME_CURRENT_STATS;
 
+        public static final String DELETE_CURRENT_STATS = "DELETE FROM "+TABLE_NAME_CURRENT_STATS;
+
     }
 
 
