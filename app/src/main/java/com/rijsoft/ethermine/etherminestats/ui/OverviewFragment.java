@@ -150,7 +150,10 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
     public void setDataToShow(CurrentStats currentStats) {
         this.currentStats = currentStats;
 
-        Log.d("currentStats",currentStats.getData().getActiveWorkers());
+        String activeWorkers = currentStats.getData().getActiveWorkers() == null
+                ? "0":currentStats.getData().getActiveWorkers();
+
+         Log.d("currentStats", activeWorkers);
 
     }
 
