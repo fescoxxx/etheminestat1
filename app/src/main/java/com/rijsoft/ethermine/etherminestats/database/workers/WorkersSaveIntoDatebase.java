@@ -26,6 +26,8 @@ public class WorkersSaveIntoDatebase extends AsyncTask<Workers, Void, Void> {
             mDatabase.insertIntoWorkers(workers);
         } catch (Exception e) {
             Log.d(TAG, e.getMessage());
+        } finally {
+            mDatabase.close();
         }
         return null;
     }

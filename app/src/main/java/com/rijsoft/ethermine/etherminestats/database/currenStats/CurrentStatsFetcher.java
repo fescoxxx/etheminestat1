@@ -44,6 +44,7 @@ public class CurrentStatsFetcher extends Thread {
                 } while (cursorData.moveToNext());
             }
         }
+        mDb.close();
 
 
     }

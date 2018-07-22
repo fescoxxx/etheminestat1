@@ -1,16 +1,25 @@
 package com.rijsoft.ethermine.etherminestats.ui;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.rijsoft.ethermine.etherminestats.R;
+import com.rijsoft.ethermine.etherminestats.contracts.SettingsContract;
+import com.rijsoft.ethermine.etherminestats.intractors.GetSettingsIntractorImpl;
+import com.rijsoft.ethermine.etherminestats.model.settings.Settings;
+import com.rijsoft.ethermine.etherminestats.presenters.SettingsPresenterImpl;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,7 +29,7 @@ import com.rijsoft.ethermine.etherminestats.R;
  * Use the {@link SettingsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment implements SettingsContract.MainView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,6 +38,10 @@ public class SettingsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Settings settings;
+    private ProgressBar progressBar;
+    private SettingsContract.presenter presenter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -59,6 +72,31 @@ public class SettingsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        initializeView();
+        initProgressBar();
+
+        presenter = new SettingsPresenterImpl(this, new GetSettingsIntractorImpl(), getActivity());
+        presenter.requestDataFromServer();
+    }
+
+    private void initProgressBar() {
+        progressBar = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleLarge);
+        progressBar.getIndeterminateDrawable()
+                .setColorFilter(Color.parseColor("#DF691A"),
+                        android.graphics.PorterDuff.Mode.MULTIPLY);
+        progressBar.setIndeterminate(true);
+
+        RelativeLayout relativeLayout = new RelativeLayout(getActivity());
+        relativeLayout.setGravity(Gravity.CENTER);
+        relativeLayout.addView(progressBar);
+
+        RelativeLayout.LayoutParams params = new
+                RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        progressBar.setVisibility(View.INVISIBLE);
+        getActivity().addContentView(relativeLayout, params);
+    }
+
+    private void initializeView() {
     }
 
     @Override
@@ -92,6 +130,29 @@ public class SettingsFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void setDataToShow(Settings settings) {
+        this.settings = settings;
+        Log.d("payouts ",settings.getStatus());
+    }
+
+    @Override
+    public void onResponseFailure(Throwable throwable) {
+        Toast.makeText(getActivity(),
+                "Something went wrong...Error message: " + throwable.getMessage(),
+                Toast.LENGTH_LONG).show();
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -112,6 +173,7 @@ public class SettingsFragment extends Fragment {
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
             Log.d("refreshpay","refresh_settings");
+            presenter.onRefreshButtonClick();
         }
         return super.onOptionsItemSelected(item);
     }

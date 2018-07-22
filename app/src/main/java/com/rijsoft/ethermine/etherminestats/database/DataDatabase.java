@@ -11,12 +11,15 @@ import android.util.Log;
 import com.rijsoft.ethermine.etherminestats.Constants;
 import com.rijsoft.ethermine.etherminestats.contracts.OverviewContract;
 import com.rijsoft.ethermine.etherminestats.contracts.PayoutsContract;
+import com.rijsoft.ethermine.etherminestats.contracts.SettingsContract;
 import com.rijsoft.ethermine.etherminestats.contracts.WorkersContract;
+import com.rijsoft.ethermine.etherminestats.database.Settings.SettingsFetcher;
 import com.rijsoft.ethermine.etherminestats.database.currenStats.CurrentStatsFetcher;
 import com.rijsoft.ethermine.etherminestats.database.payouts.PayoutsFetcher;
 import com.rijsoft.ethermine.etherminestats.database.workers.WorkersFetcher;
 import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
 import com.rijsoft.ethermine.etherminestats.model.payouts.Payouts;
+import com.rijsoft.ethermine.etherminestats.model.settings.Settings;
 import com.rijsoft.ethermine.etherminestats.model.workers.Workers;
 
 import org.apache.commons.lang3.time.DateUtils;
@@ -37,8 +40,10 @@ public class DataDatabase extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL(Constants.DATABASE.CREATE_TABLE_PAYOUTS);
             sqLiteDatabase.execSQL(Constants.DATABASE.CREATE_TABLE_SETTINGS);
             sqLiteDatabase.execSQL(Constants.DATABASE.CREATE_TABLE_WORKERS);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Log.d(TAG, ex.getMessage());
+        } finally {
+            sqLiteDatabase.close();
         }
     }
 
@@ -50,48 +55,58 @@ public class DataDatabase extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL(Constants.DATABASE.DROP_PAYOUTS);
             sqLiteDatabase.execSQL(Constants.DATABASE.DROP_SETTINGS);
             sqLiteDatabase.execSQL(Constants.DATABASE.DROP_WORKERS);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Log.d(TAG, ex.getMessage());
+        } finally {
+            sqLiteDatabase.close();
         }
     }
 
     //отчистка таблицы текущей статистики
     public void clearCurrentStats() {
+        SQLiteDatabase db = this.getWritableDatabase();
         try {
-            SQLiteDatabase db = this.getWritableDatabase();
             db.execSQL(Constants.DATABASE.DELETE_CURRENT_STATS);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Log.d(TAG, ex.getMessage());
+        } finally {
+            db.close();
         }
     }
 
     //очистка таблицы с выплатами
     public void clearPayouts() {
+        SQLiteDatabase db = this.getWritableDatabase();
         try {
-            SQLiteDatabase db = this.getWritableDatabase();
             db.execSQL(Constants.DATABASE.DELETE_PAYOUTS);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Log.d(TAG, ex.getMessage());
+        } finally {
+            db.close();
         }
     }
 
     //очистка таблицы с настройками
     public void clearSettings() {
+        SQLiteDatabase db = this.getWritableDatabase();
         try {
-            SQLiteDatabase db = this.getWritableDatabase();
             db.execSQL(Constants.DATABASE.DELETE_SETTINGS);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Log.d(TAG, ex.getMessage());
+        } finally {
+            db.close();
         }
     }
 
     //очистка таблицы с настройками
     public void clearWorkers() {
+        SQLiteDatabase db = this.getWritableDatabase();
         try {
-            SQLiteDatabase db = this.getWritableDatabase();
             db.execSQL(Constants.DATABASE.DELETE_WORKERS);
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Log.d(TAG, ex.getMessage());
+        } finally {
+            db.close();
         }
     }
 
@@ -105,6 +120,8 @@ public class DataDatabase extends SQLiteOpenHelper {
             db.insert(Constants.DATABASE.TABLE_NAME_CURRENT_STATS, null, valuesDatas);
         } catch (Exception e) {
             Log.d(TAG, e.fillInStackTrace().toString());
+        } finally {
+            db.close();
         }
     }
 
@@ -119,6 +136,8 @@ public class DataDatabase extends SQLiteOpenHelper {
             db.insert(Constants.DATABASE.TABLE_NAME_PAYOUTS, null, valuesDatas);
         } catch (Exception e) {
             Log.d(TAG, e.fillInStackTrace().toString());
+        } finally {
+            db.close();
         }
     }
 
@@ -133,8 +152,33 @@ public class DataDatabase extends SQLiteOpenHelper {
             db.insert(Constants.DATABASE.TABLE_NAME_WORKERS, null, valuesDatas);
         } catch (Exception e) {
             Log.d(TAG, e.fillInStackTrace().toString());
+        } finally {
+            db.close();
         }
     }
+
+    //Вставка данных в БД Settings
+    public void insertIntoSettings(Settings settings) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues valuesDatas = new ContentValues();
+        valuesDatas.put(Constants.DATABASE.SETTINGS_JSON_BODY, settings.toString());
+        valuesDatas.put(Constants.DATABASE.SETTINGS_TIME_LIFE,getAddMinuteDate().toString());
+        try {
+            Log.d(TAG, settings.toString());
+            db.insert(Constants.DATABASE.TABLE_NAME_SETTINGS, null, valuesDatas);
+        } catch (Exception e) {
+            Log.d(TAG, e.fillInStackTrace().toString());
+        } finally {
+            db.close();
+        }
+    }
+
+    //Получение данных из БД о Settings
+    public void getSettingsFromDaraBase(SettingsContract.GetSettingsIntractor.OnFinishedListener onFinishedListener) {
+        SettingsFetcher fetcher = new SettingsFetcher(onFinishedListener,this.getWritableDatabase());
+        fetcher.start();
+    }
+
 
     //получение данных из БД o Workers
     public void getWorkersFromDataBase(WorkersContract.GetWorkersIntractor.OnFinishedListener onFinishedListener){

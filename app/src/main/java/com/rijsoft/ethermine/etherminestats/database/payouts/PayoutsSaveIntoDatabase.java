@@ -26,6 +26,8 @@ public class PayoutsSaveIntoDatabase extends AsyncTask<Payouts, Void, Void> {
             mDatabase.insertIntoPayouts(payouts);
         } catch (Exception e) {
             Log.d(TAG, e.getMessage());
+        } finally {
+            mDatabase.close();
         }
         return null;
     }

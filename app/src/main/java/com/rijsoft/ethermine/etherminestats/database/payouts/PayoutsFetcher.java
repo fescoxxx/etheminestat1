@@ -39,6 +39,7 @@ public class PayoutsFetcher extends Thread {
                 } while (cursorData.moveToNext());
             }
         }
+        mDb.close();
     }
 
     public void publishData(final Payouts data) {

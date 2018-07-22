@@ -55,6 +55,6 @@ public class Data {
     @Override
     public String toString()
     {
-        return "ClassPojo [minPayout = "+minPayout+", monitor = "+monitor+", email = "+email+", ip = "+ip+"]";
+        return "{minPayout : "+minPayout+", monitor : "+monitor+", email : "+ "\""+email+"\""+", ip : "+ "\""+ip+"\""+"}";
     }
 }

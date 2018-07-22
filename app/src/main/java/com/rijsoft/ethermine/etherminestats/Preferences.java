@@ -3,6 +3,8 @@ package com.rijsoft.ethermine.etherminestats;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.rijsoft.ethermine.etherminestats.model.settings.Settings;
+
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.io.Serializable;
@@ -17,6 +19,7 @@ public class Preferences {
     public final static String LIFE_TIME_OVERVIEW = "lifetime_overview";
     public final static String LIFE_TIME_PAYOUTS = "lifetime_pay";
     public final static String LIFE_TIME_WORKERS = "life_time_workers";
+    public final static String LIFE_TIME_SETTINGS = "life_time_settings";
 
     public final static String MINER = "miner";
 
@@ -60,6 +63,15 @@ public class Preferences {
     }
     //Payouts------------------------------------------------------------------------------------END
 
+    //Settings---------------------------------------------------------------------------------START
+     public void setLifeTimeSettings(String data) {
+        getEditor().putString(LIFE_TIME_SETTINGS, data).commit();
+     }
+     public String getLifeTimeSettings() {
+        return preferences.getString(LIFE_TIME_SETTINGS, "");
+     }
+    //Settings-----------------------------------------------------------------------------------END
+
     public void setMiner(String miner) {
         getEditor().putString(MINER, miner).commit();
     }
@@ -72,12 +84,19 @@ public class Preferences {
         int addMinuteTime = 1;
         Date targetTime = new Date(); //now
         targetTime = DateUtils.addMinutes(targetTime, addMinuteTime); //add minute
-        if (tag.equals(LIFE_TIME_OVERVIEW)) {
-            setLifeTimeOverview(dateFormat.format(targetTime));
-        } else if (tag.equals(LIFE_TIME_PAYOUTS)) {
-            setLifeTimePayouts(dateFormat.format(targetTime));
-        } else if (tag.equals(LIFE_TIME_WORKERS)) {
-            setLifeTimeWorkers(dateFormat.format(targetTime));
+        switch (tag) {
+            case LIFE_TIME_OVERVIEW:
+                setLifeTimeOverview(dateFormat.format(targetTime));
+                break;
+            case LIFE_TIME_PAYOUTS:
+                setLifeTimePayouts(dateFormat.format(targetTime));
+                break;
+            case LIFE_TIME_WORKERS:
+                setLifeTimeWorkers(dateFormat.format(targetTime));
+                break;
+            case LIFE_TIME_SETTINGS:
+                setLifeTimeSettings(dateFormat.format(targetTime));
+                break;
         }
     }
 }

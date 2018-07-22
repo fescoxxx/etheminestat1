@@ -1,4 +1,4 @@
-package com.rijsoft.ethermine.etherminestats.database.workers;
+package com.rijsoft.ethermine.etherminestats.database.Settings;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,34 +7,35 @@ import android.os.Looper;
 
 import com.google.gson.Gson;
 import com.rijsoft.ethermine.etherminestats.Constants;
-import com.rijsoft.ethermine.etherminestats.contracts.WorkersContract;
-import com.rijsoft.ethermine.etherminestats.model.workers.Workers;
+import com.rijsoft.ethermine.etherminestats.contracts.SettingsContract;
+import com.rijsoft.ethermine.etherminestats.model.settings.Settings;
 
-public class WorkersFetcher extends Thread {
-    private WorkersContract.GetWorkersIntractor.OnFinishedListener onFinishedListener;
+public class SettingsFetcher extends Thread  {
+
+    private SettingsContract.GetSettingsIntractor.OnFinishedListener onFinishedListener;
     private SQLiteDatabase mDb;
 
-    public WorkersFetcher(WorkersContract.GetWorkersIntractor.OnFinishedListener onFinishedListener,
-                          SQLiteDatabase db) {
+    public SettingsFetcher(SettingsContract.GetSettingsIntractor.OnFinishedListener onFinishedListener,
+                           SQLiteDatabase db){
         this.onFinishedListener = onFinishedListener;
         this.mDb = db;
     }
 
     @Override
     public void run() {
-        Cursor cursorData = mDb.rawQuery(Constants.DATABASE.GET_WORKERS, null);
+        Cursor cursorData = mDb.rawQuery(Constants.DATABASE.GET_SETTINGS, null);
         if (cursorData.getCount() > 0) {
             if (cursorData.moveToFirst()) {
                 do {
                     Gson gson = new Gson();
                     // Convert JSON to Java Object
                     // Convert JSON to JsonElement, and later to String
-                    Workers workers = gson.fromJson(
+                    Settings settings = gson.fromJson(
                             cursorData.getString(
                                     cursorData.getColumnIndex(
-                                            Constants.DATABASE.WORKERS_JSON_BODY)),
-                            Workers.class);
-                    publishData(workers);
+                                            Constants.DATABASE.SETTINGS_JSON_BODY)),
+                            Settings.class);
+                    publishData(settings);
                 } while (cursorData.moveToNext());
             }
         }
@@ -42,7 +43,7 @@ public class WorkersFetcher extends Thread {
 
     }
 
-    public void publishData(final Workers data) {
+    public void publishData(final Settings data) {
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override

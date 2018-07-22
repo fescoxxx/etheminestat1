@@ -26,6 +26,8 @@ public class CurrentStatsSaveIntoDatabase extends AsyncTask<CurrentStats, Void, 
             mDatabase.insertIntoCurrentStats(currentStats);
         } catch (Exception e) {
             Log.d(TAG, e.getMessage());
+        } finally {
+            mDatabase.close();
         }
         return null;
     }
