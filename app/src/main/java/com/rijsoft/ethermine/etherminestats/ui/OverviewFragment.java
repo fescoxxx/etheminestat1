@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.rijsoft.ethermine.etherminestats.R;
+import com.rijsoft.ethermine.etherminestats.adapters.OverviewAdapter;
 import com.rijsoft.ethermine.etherminestats.contracts.OverviewContract;
 import com.rijsoft.ethermine.etherminestats.database.DataDatabase;
 import com.rijsoft.ethermine.etherminestats.intractors.GetOverviewIntractorImpl;
@@ -51,6 +52,8 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
     private ProgressBar progressBar;
     private OverviewContract.presenter presenter;
 
+    private RecyclerView recyclerView;
+
     public OverviewFragment() {
     }
 
@@ -76,9 +79,10 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-            initializeView();
+
             initProgressBar();
             showProgress();
+
             presenter = new OverviewPresenterImpl(this,
                     new GetOverviewIntractorImpl(),
                     getActivity());
@@ -89,7 +93,13 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_overview, container, false);
+/*        LayoutInflater.from(container.getContext())
+                .inflate(R.layout.fragment_overview, container, false);*/
+        View view = inflater.inflate(R.layout.fragment_overview, container, false);
+        recyclerView = view.findViewById(R.id.my_recycler_view);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        return view;
     }
 
     private void initializeView() {
@@ -167,6 +177,8 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
 
     @Override
     public void onResponseFailure(Throwable throwable) {
+        OverviewAdapter adapter = new OverviewAdapter(getActivity());
+        recyclerView.setAdapter(adapter);
         Toast.makeText(getActivity(),
                 "Something went wrong...Error message: " + throwable.getMessage(),
                 Toast.LENGTH_LONG).show();
