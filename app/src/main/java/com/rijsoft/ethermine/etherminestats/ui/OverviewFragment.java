@@ -93,8 +93,6 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-/*        LayoutInflater.from(container.getContext())
-                .inflate(R.layout.fragment_overview, container, false);*/
         View view = inflater.inflate(R.layout.fragment_overview, container, false);
         recyclerView = view.findViewById(R.id.my_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -159,7 +157,8 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
     @Override
     public void setDataToShow(CurrentStats currentStats) {
         this.currentStats = currentStats;
-
+        OverviewAdapter adapter = new OverviewAdapter(getActivity(), currentStats);
+        recyclerView.setAdapter(adapter);
         String activeWorkers = currentStats.getData().getActiveWorkers() == null
                 ? "0":currentStats.getData().getActiveWorkers();
 
@@ -177,8 +176,6 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
 
     @Override
     public void onResponseFailure(Throwable throwable) {
-        OverviewAdapter adapter = new OverviewAdapter(getActivity());
-        recyclerView.setAdapter(adapter);
         Toast.makeText(getActivity(),
                 "Something went wrong...Error message: " + throwable.getMessage(),
                 Toast.LENGTH_LONG).show();

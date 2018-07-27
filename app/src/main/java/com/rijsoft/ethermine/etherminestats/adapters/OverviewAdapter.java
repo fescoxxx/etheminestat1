@@ -17,16 +17,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rijsoft.ethermine.etherminestats.R;
+import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
 
 public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.OverviewViewHolder> {
     // Set numbers of Card in RecyclerView.
-    private static final int LENGTH = 18;
+    private static final int LENGTH = 4;
 
     private final String[] mPlaces;
     private final String[] mPlaceDesc;
     private final Drawable[] mPlacePictures;
 
-    public OverviewAdapter(Context context) {
+
+
+    private CurrentStats currentStats;
+
+    public OverviewAdapter(Context context, CurrentStats currentStats) {
+        this.currentStats = currentStats;
+
+
         Resources resources = context.getResources();
         mPlaces = resources.getStringArray(R.array.places);
         mPlaceDesc = resources.getStringArray(R.array.place_desc);
