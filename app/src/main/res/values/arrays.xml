@@ -15,13 +15,11 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string-array name="places">
-        <item>Palais Garnie</item>
-        <item>Piazza del Duomo</item>
-        <item>Manhattan</item>
-        <item>Senso-ji</item>
-        <item>Sultan Ahmed Mosque</item>
-        <item>Table Mountain</item>
+    <string-array name="title_overview">
+        <item>Reported</item>
+        <item>Current</item>
+        <item>Average</item>
+        <item>Workers</item>
     </string-array>
     <string-array name="place_desc">
         <item>The Palais Garnier which locates in Paris was built from 1861 for

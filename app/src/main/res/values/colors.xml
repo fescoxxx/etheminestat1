@@ -8,4 +8,9 @@
     <color name="dark_grey">#424242</color>
     <color name="medium_grey">#9E9E9E</color>
     <color name="button_grey">#757575</color>
+    <color name="reported_green">#5CB85C</color>
+    <color name="current_blue">#5BC0DE</color>
+    <color name="average_orange">#DF691A</color>
+    <color name="workers_reg">#D9534F</color>
+
 </resources>
