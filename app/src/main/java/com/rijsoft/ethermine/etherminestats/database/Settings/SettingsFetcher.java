@@ -39,8 +39,9 @@ public class SettingsFetcher extends Thread  {
                 } while (cursorData.moveToNext());
             }
         }
-        mDb.close();
-
+        if (mDb != null) {
+            mDb.close();
+        }
     }
 
     public void publishData(final Settings data) {

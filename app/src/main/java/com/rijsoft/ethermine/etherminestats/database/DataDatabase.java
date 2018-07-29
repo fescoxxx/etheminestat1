@@ -42,8 +42,6 @@ public class DataDatabase extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL(Constants.DATABASE.CREATE_TABLE_WORKERS);
         } catch (Exception ex) {
             Log.d(TAG, ex.getMessage());
-        } finally {
-            sqLiteDatabase.close();
         }
     }
 
@@ -57,8 +55,6 @@ public class DataDatabase extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL(Constants.DATABASE.DROP_WORKERS);
         } catch (Exception ex) {
             Log.d(TAG, ex.getMessage());
-        } finally {
-            sqLiteDatabase.close();
         }
     }
 
@@ -70,7 +66,9 @@ public class DataDatabase extends SQLiteOpenHelper {
         } catch (Exception ex) {
             Log.d(TAG, ex.getMessage());
         } finally {
-            db.close();
+            if (db != null) {
+                db.close();
+            }
         }
     }
 
@@ -82,7 +80,9 @@ public class DataDatabase extends SQLiteOpenHelper {
         } catch (Exception ex) {
             Log.d(TAG, ex.getMessage());
         } finally {
-            db.close();
+            if (db != null) {
+                db.close();
+            }
         }
     }
 
@@ -94,7 +94,9 @@ public class DataDatabase extends SQLiteOpenHelper {
         } catch (Exception ex) {
             Log.d(TAG, ex.getMessage());
         } finally {
-            db.close();
+            if (db != null) {
+                db.close();
+            }
         }
     }
 
@@ -106,7 +108,9 @@ public class DataDatabase extends SQLiteOpenHelper {
         } catch (Exception ex) {
             Log.d(TAG, ex.getMessage());
         } finally {
-            db.close();
+            if (db != null) {
+                db.close();
+            }
         }
     }
 
@@ -121,7 +125,9 @@ public class DataDatabase extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.d(TAG, e.fillInStackTrace().toString());
         } finally {
-            db.close();
+            if (db != null) {
+                db.close();
+            }
         }
     }
 
@@ -137,7 +143,9 @@ public class DataDatabase extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.d(TAG, e.fillInStackTrace().toString());
         } finally {
-            db.close();
+            if (db != null) {
+                db.close();
+            }
         }
     }
 
@@ -153,7 +161,9 @@ public class DataDatabase extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.d(TAG, e.fillInStackTrace().toString());
         } finally {
-            db.close();
+            if (db != null) {
+                db.close();
+            }
         }
     }
 
@@ -169,7 +179,9 @@ public class DataDatabase extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.d(TAG, e.fillInStackTrace().toString());
         } finally {
-            db.close();
+            if (db != null) {
+                db.close();
+            }
         }
     }
 

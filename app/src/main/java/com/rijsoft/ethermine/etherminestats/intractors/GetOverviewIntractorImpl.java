@@ -47,7 +47,7 @@ public class GetOverviewIntractorImpl implements OverviewContract.GetDashboardIn
                 if (response.body().getStatus().equals("OK")) {
                     onFinishedListener.onFinished(response.body());
                     preferences.updateDateLife(LIFE_TIME_OVERVIEW);
-                    database.clearCurrentStats();
+                   // database.clearCurrentStats();
                     CurrentStatsSaveIntoDatabase task = new CurrentStatsSaveIntoDatabase(database);
                     task.execute(response.body());
                 } else {

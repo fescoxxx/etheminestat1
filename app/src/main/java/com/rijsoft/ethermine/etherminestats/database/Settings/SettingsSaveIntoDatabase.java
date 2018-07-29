@@ -28,7 +28,9 @@ public class SettingsSaveIntoDatabase extends AsyncTask<Settings, Void, Void> {
         } catch (Exception e) {
             Log.d(TAG, e.getMessage());
         } finally {
-            mDatabase.close();
+            if (mDatabase != null) {
+                mDatabase.close();
+            }
         }
         return null;
     }

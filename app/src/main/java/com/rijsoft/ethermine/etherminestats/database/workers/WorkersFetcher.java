@@ -38,7 +38,9 @@ public class WorkersFetcher extends Thread {
                 } while (cursorData.moveToNext());
             }
         }
-        mDb.close();
+        if (mDb != null) {
+            mDb.close();
+        }
 
     }
 
