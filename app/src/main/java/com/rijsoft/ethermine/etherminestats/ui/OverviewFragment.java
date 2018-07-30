@@ -141,6 +141,7 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
     @Override
     public void onDetach() {
         super.onDetach();
+        hideProgress();
         mListener = null;
     }
 

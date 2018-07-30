@@ -127,6 +127,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.MainV
     @Override
     public void onDetach() {
         super.onDetach();
+        hideProgress();
         mListener = null;
     }
 

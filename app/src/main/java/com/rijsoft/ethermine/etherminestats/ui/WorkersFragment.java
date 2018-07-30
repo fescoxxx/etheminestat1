@@ -131,6 +131,7 @@ public class WorkersFragment extends Fragment implements WorkersContract.MainVie
     @Override
     public void onDetach() {
         super.onDetach();
+        hideProgress();
         mListener = null;
     }
 

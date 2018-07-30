@@ -129,6 +129,7 @@ public class PaymentsFragment extends Fragment implements PayoutsContract.MainVi
     @Override
     public void onDetach() {
         super.onDetach();
+        hideProgress();
         mListener = null;
     }
 
