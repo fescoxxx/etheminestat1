@@ -47,12 +47,13 @@
             android:layout_marginLeft="@dimen/md_keylines"
             android:layout_marginRight="@dimen/md_keylines"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/roboto_medium"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/white"
             tools:text="@string/item_title" />
 
         <TextView
-            android:id="@+id/card_text"
+            android:id="@+id/two_name"
             android:layout_width="173dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_title_backround"
@@ -61,40 +62,41 @@
             android:layout_marginRight="@dimen/md_keylines"
             android:layout_marginTop="@dimen/md_keylines"
             android:ellipsize="end"
+            android:fontFamily="@font/roboto"
             android:singleLine="true"
             android:textColor="@color/dark_grey"
             android:textSize="@dimen/article_subheading"
             tools:text="@string/item_desc" />
 
-        <Button
-            android:id="@+id/action_button"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/procent"
+            android:layout_width="359dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_text"
-            android:text="Action"
-            android:textColor="?attr/colorPrimary" />
-
-        <ImageButton
-            android:id="@+id/share_button"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="@dimen/cards_button_width"
-            android:layout_height="@dimen/cards_button_height"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/card_text"
+            android:layout_below="@+id/card_title_backround"
+            android:layout_marginBottom="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keylines"
             android:layout_marginRight="@dimen/md_keylines"
-            android:tint="@color/button_grey"
-            app:srcCompat="@drawable/ic_share" />
+            android:layout_marginTop="@dimen/md_keylines"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto"
+            android:gravity="right"
+            android:singleLine="true"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/article_subheading"
+            tools:text="@string/item_desc" />
 
-        <ImageButton
-            android:id="@+id/favorite_button"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="@dimen/cards_button_width"
-            android:layout_height="@dimen/cards_button_height"
-            android:layout_below="@+id/card_text"
-            android:layout_marginRight="@dimen/md_keylines"
-            android:layout_toLeftOf="@id/share_button"
-            android:tint="@color/button_grey"
-            app:srcCompat="@drawable/ic_favorite" />
+        <TextView
+            android:id="@+id/gh_name"
+            android:layout_width="110dp"
+            android:layout_height="46dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="17dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+
     </RelativeLayout>
  </android.support.v7.widget.CardView>
