@@ -160,10 +160,6 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
         this.currentStats = currentStats;
         OverviewAdapter adapter = new OverviewAdapter(getActivity(), currentStats);
         recyclerView.setAdapter(adapter);
-        String activeWorkers = currentStats.getData().getActiveWorkers() == null
-                ? "0":currentStats.getData().getActiveWorkers();
-
-         Log.d("currentStats", activeWorkers);
 
     }
 
@@ -178,7 +174,7 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
     @Override
     public void onResponseFailure(Throwable throwable) {
         Toast.makeText(getActivity(),
-                "Something went wrong...Error message: " + throwable.getMessage(),
+                "Error message: " + throwable.getMessage(),
                 Toast.LENGTH_LONG).show();
     }
 

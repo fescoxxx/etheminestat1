@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         mContext = this;
         preferences = new Preferences(this);
-        preferences.setMiner("0x680ecc6c85c6ad3566cbe7e48d3500c5eca48bd9");
+        preferences.setMiner("d83E0492108e809872178a325Eb784e1355780a3");
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);

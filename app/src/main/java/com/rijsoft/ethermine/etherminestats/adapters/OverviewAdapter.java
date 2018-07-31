@@ -3,22 +3,17 @@ package com.rijsoft.ethermine.etherminestats.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rijsoft.ethermine.etherminestats.R;
 import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
+
+import java.util.Locale;
 
 public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.OverviewViewHolder> {
     // Set numbers of Card in RecyclerView.
@@ -26,8 +21,6 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.Overvi
     private Context context;
 
     private final String[] mTitleOverview;
-    private final String[] mPlaceDesc;
-
 
     private CurrentStats currentStats;
 
@@ -36,7 +29,6 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.Overvi
         this.context = context;
         Resources resources = context.getResources();
         mTitleOverview = resources.getStringArray(R.array.title_overview);
-        mPlaceDesc = resources.getStringArray(R.array.place_desc);
     }
 
     @Override
@@ -46,22 +38,104 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.Overvi
 
     @Override
     public void onBindViewHolder(OverviewViewHolder holder, int position) {
+        Double heshreit;
+        String strHeshreit = "";
+        String addReit = "";
+        String percent = "";
+        String setStr;
 
-        if (position == 0){
-            holder.title_card_backround.setBackgroundColor(context.getResources().getColor(R.color.average_orange));
-        }
-        else if (position == 1){
-            holder.title_card_backround.setBackgroundColor(context.getResources().getColor(R.color.current_blue));
-        }
-        else if (position == 2){
-            holder.title_card_backround.setBackgroundColor(context.getResources().getColor(R.color.reported_green));
-        }
-        else if (position == 3){
-            holder.title_card_backround.setBackgroundColor(context.getResources().getColor(R.color.workers_reg));
-        }
+        Double valid ;
+        Double stales;
+        Double invalid;
+        Double summ;
 
+        switch (position) {
+            //REPORTED h\s
+            case 0:
+                try {
+                    heshreit = Double.valueOf(currentStats.getData().getReportedHashrate());
+                    if (heshreit*0.000001 < 1000) {
+                        strHeshreit = String.format( Locale.US, "%.2f", heshreit*0.000001) + " MH/s";
+                    } else if (heshreit*0.000001 >= 1000) {
+                        strHeshreit = String.format( Locale.US, "%.2f", heshreit*0.000000001) + " GH/s";
+                    }
+                    valid = Double.valueOf(currentStats.getData().getValidShares());
+                    stales = Double.valueOf(currentStats.getData().getStaleShares());
+                    invalid = Double.valueOf(currentStats.getData().getInvalidShares());
+                    summ = stales+invalid;
+                    Double prcnt =  100 - ((summ / valid) *100);
+                    percent = "Valid "+currentStats.getData().getValidShares() + "("+ String.format( Locale.US, "%.2f", prcnt)+"%)";
+                } catch (NullPointerException ex) {
+                    heshreit = 0d;
+                    addReit = " H/s";
+                    percent = "Valid 0(0%)";
+                }
+                setStr = strHeshreit + addReit;
+                holder.gh_name.setText(setStr);
+                holder.procent.setText(percent);
+                holder.title_card_backround.setBackgroundColor(context.getResources().getColor(R.color.reported_green));
+                break;
+            //CURRENT h\s
+            case 1:
+                try {
+                    heshreit = Double.valueOf(currentStats.getData().getCurrentHashrate());
+                    if (heshreit*0.000001 < 1000) {
+                        strHeshreit = String.format( Locale.US, "%.2f", heshreit*0.000001) + " MH/s";
+                    } else if (heshreit*0.000001 >= 1000) {
+                        strHeshreit = String.format( Locale.US, "%.2f", heshreit*0.000000001) + " GH/s";
+                    }
+                    valid = Double.valueOf(currentStats.getData().getValidShares());
+                    stales = Double.valueOf(currentStats.getData().getStaleShares());
+                    invalid = Double.valueOf(currentStats.getData().getInvalidShares());
+                    summ = valid+invalid;
+
+                    Double prcnt =  ((stales / summ) *100);
+                    percent = "Stale "+currentStats.getData().getStaleShares() + "("+ String.format( Locale.US, "%.2f", prcnt)+"%)";
+                } catch (NullPointerException ex) {
+                    heshreit = 0d;
+                    addReit = " H/s";
+                    percent = "0(0%)";
+                }
+                setStr = strHeshreit + addReit;
+                holder.gh_name.setText(setStr);
+                holder.procent.setText(percent);
+                holder.title_card_backround.setBackgroundColor(context.getResources().getColor(R.color.current_blue));
+                break;
+            //AVERANGE h\s
+            case 2:
+                try {
+                    heshreit = Double.valueOf(currentStats.getData().getAverageHashrate());
+                    if (heshreit*0.000001 < 1000) {
+                        strHeshreit = String.format( Locale.US, "%.2f", heshreit*0.000001) + " MH/s";
+                    } else if (heshreit*0.000001 >= 1000) {
+                        strHeshreit = String.format( Locale.US, "%.2f", heshreit*0.000000001) + " GH/s";
+                    }
+                } catch (NullPointerException ex) {
+                    heshreit = 0d;
+                    addReit = " H/s";
+                    percent = "0(0%)";
+                }
+                setStr = strHeshreit + addReit;
+                holder.gh_name.setText(setStr);
+                holder.procent.setText(percent);
+                holder.title_card_backround.setBackgroundColor(context.getResources().getColor(R.color.average_orange));
+                break;
+            //ACTIVE WORKERS
+            case 3:
+                try {
+                    heshreit = Double.valueOf(currentStats.getData().getActiveWorkers());
+                } catch (NullPointerException ex) {
+                    heshreit = 0d;
+                    addReit = "H/s";
+                    percent = "0(0%)";
+                }
+                setStr = String.valueOf(heshreit) + addReit;
+                holder.gh_name.setText(setStr);
+                holder.procent.setText(percent);
+                holder.title_card_backround.setBackgroundColor(context.getResources().getColor(R.color.workers_reg));
+                break;
+        }
         holder.title_card.setText(mTitleOverview[position % mTitleOverview.length]);
-        holder.description.setText(mPlaceDesc[position % mPlaceDesc.length]);
     }
 
 
@@ -70,33 +144,15 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.Overvi
         return LENGTH;
     }
 
-    public  class OverviewViewHolder extends RecyclerView.ViewHolder {
-        public TextView title_card;
+    public class OverviewViewHolder extends RecyclerView.ViewHolder {
+        public TextView title_card, gh_name, procent;
         public RelativeLayout title_card_backround;
-        public TextView description;
         public OverviewViewHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.item_card, parent, false));
+            super(inflater.inflate(R.layout.item_card_two, parent, false));
             title_card = (TextView) itemView.findViewById(R.id.card_title);
+            gh_name = (TextView) itemView.findViewById(R.id.gh_name);
+            procent = (TextView) itemView.findViewById(R.id.procent);
             title_card_backround = (RelativeLayout) itemView.findViewById(R.id.card_title_backround);
-
-
-            description = (TextView) itemView.findViewById(R.id.card_text);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-
-            // Adding Snackbar to Action Button inside card
-            Button button = (Button)itemView.findViewById(R.id.action_button);
-            button.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(v, "Action is pressed",
-                            Snackbar.LENGTH_LONG).show();
-                }
-            });
         }
     }
 

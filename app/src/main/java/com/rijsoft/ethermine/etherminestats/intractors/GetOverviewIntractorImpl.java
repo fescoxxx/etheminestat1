@@ -51,13 +51,20 @@ public class GetOverviewIntractorImpl implements OverviewContract.GetDashboardIn
                     CurrentStatsSaveIntoDatabase task = new CurrentStatsSaveIntoDatabase(database);
                     task.execute(response.body());
                 } else {
+                    onFinishedListener.onFinished(new CurrentStats());
                     onFinishedListener.onFailure(new Throwable("Error loading data. Check your account settings"));
                 }
             }
 
             @Override
             public void onFailure(Call<CurrentStats> call, Throwable t) {
-                onFinishedListener.onFailure(t);
+                if(t.getMessage().contains("address associated with hostname")){
+                    onFinishedListener.onFinished(new CurrentStats());
+                    onFinishedListener.onFailure(new Throwable("No connection to internet"));
+                } else {
+                    onFinishedListener.onFinished(new CurrentStats());
+                    onFinishedListener.onFailure(new Throwable("No data"));
+                }
             }
         });
 
