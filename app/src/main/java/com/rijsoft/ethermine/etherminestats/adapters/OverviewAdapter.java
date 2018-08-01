@@ -20,7 +20,8 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.Overvi
     private static final int LENGTH = 4;
     private Context context;
 
-    private final String[] mTitleOverview;
+    private final String[] mTitleOverview_1;
+    private final String[] mTitleOverview_2;
 
     private CurrentStats currentStats;
 
@@ -28,7 +29,8 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.Overvi
         this.currentStats = currentStats;
         this.context = context;
         Resources resources = context.getResources();
-        mTitleOverview = resources.getStringArray(R.array.title_overview);
+        mTitleOverview_1 = resources.getStringArray(R.array.title_overview_1);
+        mTitleOverview_2 = resources.getStringArray(R.array.title_overview_2);
     }
 
     @Override
@@ -50,7 +52,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.Overvi
         Double summ;
 
         switch (position) {
-            //REPORTED h\s
+            //REPORTED LEFT
             case 0:
                 try {
                     heshreit = Double.valueOf(currentStats.getData().getReportedHashrate());
@@ -59,24 +61,16 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.Overvi
                     } else if (heshreit*0.000001 >= 1000) {
                         strHeshreit = String.format( Locale.US, "%.2f", heshreit*0.000000001) + " GH/s";
                     }
-                    valid = Double.valueOf(currentStats.getData().getValidShares());
-                    stales = Double.valueOf(currentStats.getData().getStaleShares());
-                    invalid = Double.valueOf(currentStats.getData().getInvalidShares());
-                    summ = stales+invalid;
-                    Double prcnt =  100 - ((summ / valid) *100);
-                    percent = "Valid "+currentStats.getData().getValidShares() + "("+ String.format( Locale.US, "%.2f", prcnt)+"%)";
                 } catch (NullPointerException ex) {
-                    heshreit = 0d;
+                    strHeshreit = "0";
                     addReit = " H/s";
-                    percent = "Valid 0(0%)";
                 }
                 setStr = strHeshreit + addReit;
-                holder.gh_name.setText(setStr);
-                holder.procent.setText(percent);
-                holder.title_card_backround.setBackgroundColor(context.getResources().getColor(R.color.reported_green));
-                break;
-            //CURRENT h\s
-            case 1:
+                holder.gh_name_left.setText(setStr);
+                holder.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.reported_green));
+
+
+                //CURRENT RIGHT
                 try {
                     heshreit = Double.valueOf(currentStats.getData().getCurrentHashrate());
                     if (heshreit*0.000001 < 1000) {
@@ -84,25 +78,17 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.Overvi
                     } else if (heshreit*0.000001 >= 1000) {
                         strHeshreit = String.format( Locale.US, "%.2f", heshreit*0.000000001) + " GH/s";
                     }
-                    valid = Double.valueOf(currentStats.getData().getValidShares());
-                    stales = Double.valueOf(currentStats.getData().getStaleShares());
-                    invalid = Double.valueOf(currentStats.getData().getInvalidShares());
-                    summ = valid+invalid;
 
-                    Double prcnt =  ((stales / summ) *100);
-                    percent = "Stale "+currentStats.getData().getStaleShares() + "("+ String.format( Locale.US, "%.2f", prcnt)+"%)";
                 } catch (NullPointerException ex) {
-                    heshreit = 0d;
+                    strHeshreit = "0";
                     addReit = " H/s";
-                    percent = "0(0%)";
                 }
                 setStr = strHeshreit + addReit;
-                holder.gh_name.setText(setStr);
-                holder.procent.setText(percent);
-                holder.title_card_backround.setBackgroundColor(context.getResources().getColor(R.color.current_blue));
+                holder.gh_name_right.setText(setStr);
+                holder.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.reported_green));
                 break;
-            //AVERANGE h\s
-            case 2:
+            case 1:
+                //AVERANGE LEFT
                 try {
                     heshreit = Double.valueOf(currentStats.getData().getAverageHashrate());
                     if (heshreit*0.000001 < 1000) {
@@ -111,31 +97,63 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.Overvi
                         strHeshreit = String.format( Locale.US, "%.2f", heshreit*0.000000001) + " GH/s";
                     }
                 } catch (NullPointerException ex) {
-                    heshreit = 0d;
+                    strHeshreit = "0";
                     addReit = " H/s";
-                    percent = "0(0%)";
                 }
                 setStr = strHeshreit + addReit;
-                holder.gh_name.setText(setStr);
-                holder.procent.setText(percent);
-                holder.title_card_backround.setBackgroundColor(context.getResources().getColor(R.color.average_orange));
-                break;
-            //ACTIVE WORKERS
-            case 3:
+                holder.gh_name_left.setText(setStr);
+                holder.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.average_orange));
+
+                //ACTIVE WORKERS RIGHT
                 try {
-                    heshreit = Double.valueOf(currentStats.getData().getActiveWorkers());
+                    setStr = currentStats.getData().getActiveWorkers();
                 } catch (NullPointerException ex) {
-                    heshreit = 0d;
-                    addReit = "H/s";
+                    setStr = "0";
+                }
+                holder.gh_name_right.setText(setStr);
+                holder.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.average_orange));
+                break;
+            case 2:
+                //VALID SHARES LEFT
+                try {
+                    valid = Double.valueOf(currentStats.getData().getValidShares());
+                    stales = Double.valueOf(currentStats.getData().getStaleShares());
+                    invalid = Double.valueOf(currentStats.getData().getInvalidShares());
+                    summ = stales+invalid;
+                    Double prcnt =  100 - ((summ / valid) *100);
+                    percent = ""+currentStats.getData().getValidShares() + "("+ String.format( Locale.US, "%.2f", prcnt)+"%)";
+                } catch (NullPointerException ex) {
                     percent = "0(0%)";
                 }
-                setStr = String.valueOf(heshreit) + addReit;
-                holder.gh_name.setText(setStr);
-                holder.procent.setText(percent);
-                holder.title_card_backround.setBackgroundColor(context.getResources().getColor(R.color.workers_reg));
+                holder.gh_name_left.setText(percent);
+                holder.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.current_blue));
+
+                //STALE SHARES RIGHT
+                try {
+                    valid = Double.valueOf(currentStats.getData().getValidShares());
+                    stales = Double.valueOf(currentStats.getData().getStaleShares());
+                    invalid = Double.valueOf(currentStats.getData().getInvalidShares());
+                    summ = valid+invalid;
+
+                    Double prcnt =  ((stales / summ) *100);
+                    percent = currentStats.getData().getStaleShares() + "("+ String.format( Locale.US, "%.2f", prcnt)+"%)";
+                } catch (NullPointerException ex) {
+                    percent = "0(0%)";
+                }
+                holder.gh_name_right.setText(percent);
+                holder.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.current_blue));
+                break;
+            case 3:
+                //INVALID LEFT
+
+                //LAST SEEN RIGHT
+
+
+
                 break;
         }
-        holder.title_card.setText(mTitleOverview[position % mTitleOverview.length]);
+        holder.title_card_left.setText(mTitleOverview_1[position % mTitleOverview_1.length]);
+        holder.title_card_right.setText(mTitleOverview_2[position % mTitleOverview_2.length]);
     }
 
 
@@ -145,14 +163,25 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.Overvi
     }
 
     public class OverviewViewHolder extends RecyclerView.ViewHolder {
-        public TextView title_card, gh_name, procent;
-        public RelativeLayout title_card_backround;
+        public TextView title_card_left, gh_name_left;
+        public RelativeLayout title_card_backround_left;
+
+        public TextView title_card_right, gh_name_right;
+        public RelativeLayout title_card_backround_right;
+
         public OverviewViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_card_two, parent, false));
-            title_card = (TextView) itemView.findViewById(R.id.card_title);
-            gh_name = (TextView) itemView.findViewById(R.id.gh_name);
-            procent = (TextView) itemView.findViewById(R.id.procent);
-            title_card_backround = (RelativeLayout) itemView.findViewById(R.id.card_title_backround);
+
+            //left
+            title_card_left = (TextView) itemView.findViewById(R.id.card_title_left);
+            gh_name_left = (TextView) itemView.findViewById(R.id.gh_name_left);
+            title_card_backround_left = (RelativeLayout) itemView.findViewById(R.id.card_title_backround_left);
+
+
+            //right
+            title_card_right = (TextView) itemView.findViewById(R.id.card_title_right);
+            gh_name_right  = (TextView) itemView.findViewById(R.id.gh_name_right);
+            title_card_backround_right  = (RelativeLayout) itemView.findViewById(R.id.card_title_backround_right);
         }
     }
 
