@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.rijsoft.ethermine.etherminestats.Preferences;
+import com.rijsoft.ethermine.etherminestats.Utils;
 import com.rijsoft.ethermine.etherminestats.contracts.OverviewContract;
 import com.rijsoft.ethermine.etherminestats.database.DataDatabase;
 import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
@@ -39,7 +40,12 @@ public class OverviewPresenterImpl implements
         if(mainView != null){
             mainView.showProgress();
         }
-        getDashboardIntractor.getOverview(this, mDatabase, context);
+        if(Utils.isNetworkAvailable(context)) {
+            getDashboardIntractor.getOverview(this, mDatabase, context);
+        } else {
+            this.onFailure(new Throwable("No connection to internet"));
+            mDatabase.getCurrentStatsFromDataBase(this);
+        }
     }
 
     @Override
@@ -57,7 +63,12 @@ public class OverviewPresenterImpl implements
         Log.d("preferences", preferences.getLifeTimeOverview());
 
         if (dateLife.before(new Date())) {
-            getDashboardIntractor.getOverview(this, mDatabase, context);
+            if(Utils.isNetworkAvailable(context)) {
+                getDashboardIntractor.getOverview(this, mDatabase, context);
+            } else {
+                this.onFailure(new Throwable("No connection to internet"));
+                mDatabase.getCurrentStatsFromDataBase(this);
+            }
         } else  {
             mDatabase.getCurrentStatsFromDataBase(this);
         }

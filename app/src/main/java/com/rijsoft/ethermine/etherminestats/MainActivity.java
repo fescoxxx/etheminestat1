@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private TextView mTextMessage;
     private Context mContext;
     private Preferences preferences;
+    private CurrentSelect currentSelect;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,16 +44,24 @@ public class MainActivity extends AppCompatActivity
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_overview:
+                    if(!currentSelect.equals(CurrentSelect.OVERVEW))
                     loadFragment(OverviewFragment.newInstance("1","2"));
+                    currentSelect = CurrentSelect.OVERVEW;
                     return true;
                 case R.id.navigation_workers:
+                    if(!currentSelect.equals(CurrentSelect.WORKERS))
                     loadFragment(WorkersFragment.newInstance("1","2"));
+                    currentSelect = CurrentSelect.WORKERS;
                     return true;
                 case R.id.navigation_payments:
+                    if(!currentSelect.equals(CurrentSelect.PAYMENTS))
                     loadFragment(PaymentsFragment.newInstance("1","2"));
+                    currentSelect = CurrentSelect.PAYMENTS;
                     return true;
                 case R.id.navigation_settings:
+                    if(!currentSelect.equals(CurrentSelect.SETTINGS))
                     loadFragment(SettingsFragment.newInstance("1","2"));
+                    currentSelect = CurrentSelect.SETTINGS;
                     return true;
             }
             return false;
@@ -69,6 +78,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        currentSelect = CurrentSelect.OVERVEW;
         mContext = this;
         preferences = new Preferences(this);
         preferences.setMiner("d83E0492108e809872178a325Eb784e1355780a3");
@@ -89,4 +99,11 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+}
+
+enum CurrentSelect{
+    OVERVEW,
+    WORKERS,
+    PAYMENTS,
+    SETTINGS
 }

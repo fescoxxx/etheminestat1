@@ -146,6 +146,9 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.Overvi
             case 3:
                 //INVALID LEFT
 
+
+
+
                 //LAST SEEN RIGHT
 
 
