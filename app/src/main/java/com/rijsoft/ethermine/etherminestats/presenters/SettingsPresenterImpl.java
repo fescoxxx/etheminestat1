@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.rijsoft.ethermine.etherminestats.Preferences;
+import com.rijsoft.ethermine.etherminestats.Utils;
 import com.rijsoft.ethermine.etherminestats.contracts.SettingsContract;
 import com.rijsoft.ethermine.etherminestats.database.DataDatabase;
 import com.rijsoft.ethermine.etherminestats.model.settings.Settings;
@@ -38,7 +39,13 @@ public class SettingsPresenterImpl implements SettingsContract.presenter, Settin
         if(mainView != null){
             mainView.showProgress();
         }
-        getSettingsIntractor.getSettings(this, mDatabase, context);
+        if(Utils.isNetworkAvailable(context)) {
+            getSettingsIntractor.getSettings(this, mDatabase, context);
+        }
+        else {
+            this.onFailure(new Throwable("No connection to internet"));
+            mDatabase.getSettingsFromDaraBase(this);
+        }
     }
 
     @Override
@@ -56,7 +63,13 @@ public class SettingsPresenterImpl implements SettingsContract.presenter, Settin
         Log.d("preferences", preferences.getLifeTimePayouts());
 
         if (dateLife.before(new Date())) {
-            getSettingsIntractor.getSettings(this, mDatabase, context);
+            if(Utils.isNetworkAvailable(context)) {
+                getSettingsIntractor.getSettings(this, mDatabase, context);
+            }
+            else {
+                this.onFailure(new Throwable("No connection to internet"));
+                mDatabase.getSettingsFromDaraBase(this);
+            }
         } else  {
             mDatabase.getSettingsFromDaraBase(this);
         }
