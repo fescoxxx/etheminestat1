@@ -67,7 +67,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             catch (Exception ex) {
                 unpaidStr = "0.0 ETH";
             }
-            header.unpaid.setText(unpaidStr);
+            header.unpaid.setText(unpaidStr.replace("\n", ""));
         }
         else  if(holder instanceof OverviewItemViewHolder)
         {
