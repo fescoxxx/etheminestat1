@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.rijsoft.ethermine.etherminestats.Preferences;
+import com.rijsoft.ethermine.etherminestats.Utils;
 import com.rijsoft.ethermine.etherminestats.contracts.PayoutsContract;
 import com.rijsoft.ethermine.etherminestats.database.DataDatabase;
 import com.rijsoft.ethermine.etherminestats.model.payouts.Payouts;
@@ -39,7 +40,13 @@ public class PayoutsPresentrImpl implements PayoutsContract.presenter
         if(mainView != null){
             mainView.showProgress();
         }
-        getPayoutsIntractor.getPayouts(this, mDatabase, context);
+        if(Utils.isNetworkAvailable(context)) {
+            getPayoutsIntractor.getPayouts(this, mDatabase, context);
+        } else {
+            this.onFailure(new Throwable("No connection to internet"));
+            mDatabase.getPayoutsFromDataBase(this);
+        }
+
     }
 
     @Override

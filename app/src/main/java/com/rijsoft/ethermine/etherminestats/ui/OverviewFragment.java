@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,12 +20,12 @@ import android.widget.Toast;
 import com.rijsoft.ethermine.etherminestats.R;
 import com.rijsoft.ethermine.etherminestats.adapters.OverviewAdapter;
 import com.rijsoft.ethermine.etherminestats.contracts.OverviewContract;
-import com.rijsoft.ethermine.etherminestats.database.DataDatabase;
 import com.rijsoft.ethermine.etherminestats.intractors.GetOverviewIntractorImpl;
 import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
 import com.rijsoft.ethermine.etherminestats.presenters.OverviewPresenterImpl;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -160,7 +159,6 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
         this.currentStats = currentStats;
         OverviewAdapter adapter = new OverviewAdapter(getActivity(), currentStats);
         recyclerView.setAdapter(adapter);
-
     }
 
     @Override
