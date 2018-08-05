@@ -18,6 +18,7 @@ public class WorkersPreseterImpl implements WorkersContract.presenter,
     private WorkersContract.GetWorkersIntractor getWorkersIntractor;
     private Context context;
     private DataDatabase mDatabase;
+    private Preferences preferences;
 
     public WorkersPreseterImpl(WorkersContract.MainView mainView,
                                WorkersContract.GetWorkersIntractor getWorkersIntractor,
@@ -25,6 +26,7 @@ public class WorkersPreseterImpl implements WorkersContract.presenter,
         this.mainView = mainView;
         this.getWorkersIntractor = getWorkersIntractor;
         this.context = context;
+        this.preferences = new Preferences(context);
     }
 
     @Override

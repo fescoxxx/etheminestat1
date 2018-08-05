@@ -14,11 +14,13 @@ public class SettingsFetcher extends Thread  {
 
     private SettingsContract.GetSettingsIntractor.OnFinishedListener onFinishedListener;
     private SQLiteDatabase mDb;
-
+    private String tagAction;
     public SettingsFetcher(SettingsContract.GetSettingsIntractor.OnFinishedListener onFinishedListener,
-                           SQLiteDatabase db){
+                           SQLiteDatabase db,
+                           String tagAction){
         this.onFinishedListener = onFinishedListener;
         this.mDb = db;
+        this.tagAction = tagAction;
     }
 
     @Override
@@ -49,7 +51,7 @@ public class SettingsFetcher extends Thread  {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                onFinishedListener.onFinished(data);
+                onFinishedListener.onFinished(data, tagAction);
             }
         });
     }

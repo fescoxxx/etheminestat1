@@ -20,6 +20,7 @@ public class PayoutsPresentrImpl implements PayoutsContract.presenter
     private PayoutsContract.GetPayoutsIntractor getPayoutsIntractor;
     private Context context;
     private DataDatabase mDatabase;
+    private Preferences preferences;
 
     public PayoutsPresentrImpl(PayoutsContract.MainView mainView,
                                PayoutsContract.GetPayoutsIntractor getPayoutsIntractor,
@@ -27,6 +28,7 @@ public class PayoutsPresentrImpl implements PayoutsContract.presenter
         this.mainView = mainView;
         this.getPayoutsIntractor = getPayoutsIntractor;
         this.context = context;
+        this.preferences = new Preferences(context);
 
     }
 

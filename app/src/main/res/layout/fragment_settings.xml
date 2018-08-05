@@ -25,7 +25,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/link"
+            android:id="@+id/eth_setting"
             android:layout_width="354dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -36,35 +36,38 @@
             android:fontFamily="@font/roboto_medium"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/white"
-            tools:text="@string/item_title" />
+            android:text="@string/eth_settings"
+            tools:text="@string/eth_settings" />
 
         <TextView
             android:id="@+id/miner_settings"
-            android:layout_width="173dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/link"
+            android:layout_alignStart="@+id/eth_setting"
             android:layout_alignTop="@+id/link_edit_site"
             android:ellipsize="end"
             android:fontFamily="@font/roboto"
             android:singleLine="true"
+            android:text="@string/miner_settings"
             android:textColor="@color/dark_grey"
             android:textSize="16sp"
-            android:text="Miner Settings:"
-            tools:text="Miner Settings:" />
+            tools:text="@string/miner_settings" />
 
         <TextView
             android:id="@+id/line_two"
-            android:layout_width="319dp"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/link"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_alignStart="@+id/eth_setting"
             android:layout_centerVertical="true"
             android:ellipsize="end"
             android:fontFamily="@font/roboto"
+            android:gravity="center"
             android:singleLine="true"
-            android:text="Send if mals of end"
+            android:text="@string/send_a_mail_if_one_of_my_workers_goes_offline"
+            android:textAlignment="viewStart"
             android:textColor="@color/dark_grey"
-            android:textSize="@dimen/article_subheading"
-            tools:text="@string/item_desc" />
+            android:textSize="14sp"
+            tools:text="@string/send_a_mail_if_one_of_my_workers_goes_offline" />
 
 
         <Button
@@ -74,11 +77,11 @@
             android:layout_alignEnd="@+id/link_edit_site"
             android:layout_alignParentTop="true"
             android:layout_marginTop="50dp"
-            android:text="OK" />
+            android:text="@string/ok" />
 
         <TextView
             android:id="@+id/link_edit_site"
-            android:layout_width="173dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
@@ -86,116 +89,122 @@
             android:layout_marginTop="99dp"
             android:fontFamily="@font/roboto"
             android:gravity="right"
-            android:text="Edit on ethermine.org"
+            android:text="@string/edit_on_ethermine_org"
             android:textSize="16sp"
-            tools:text="Edit on ethermine.org" />
+            tools:text="@string/edit_on_ethermine_org" />
 
         <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="30dp"
+            android:id="@+id/checkBoxMonitor"
+            android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_alignEnd="@+id/link_edit_site"
-            android:layout_alignTop="@+id/line_two"
-            android:text="CheckBox" />
+            android:layout_alignEnd="@+id/eth_setting"
+            android:layout_centerVertical="true"
+            android:textAlignment="textEnd" />
 
         <TextView
             android:id="@+id/line_tree"
-            android:layout_width="181dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/link"
-            android:layout_marginBottom="100dp"
+            android:layout_alignStart="@+id/eth_setting"
+            android:layout_marginBottom="111dp"
+            android:layout_marginStart="0dp"
             android:ellipsize="end"
             android:fontFamily="@font/roboto"
             android:singleLine="true"
-            android:text="1"
+            android:text="@string/email_address"
+            android:textAlignment="viewStart"
             android:textColor="@color/dark_grey"
             android:textSize="@dimen/article_subheading"
-            tools:text="@string/item_desc" />
+            tools:text="@string/email_address" />
 
         <TextView
             android:id="@+id/line_tree_email"
-            android:layout_width="156dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/link_edit_site"
             android:layout_alignTop="@+id/line_tree"
             android:ellipsize="end"
             android:fontFamily="@font/roboto"
             android:singleLine="true"
-            android:text="2"
+            android:text="@string/tire"
+            android:textAlignment="textEnd"
             android:textColor="@color/dark_grey"
             android:textSize="@dimen/article_subheading"
-            tools:text="@string/item_desc" />
+            tools:text="@string/tire" />
 
 
         <TextView
             android:id="@+id/line_payment"
-            android:layout_width="268dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/link"
-            android:layout_marginBottom="60dp"
+            android:layout_alignStart="@+id/eth_setting"
+            android:layout_marginBottom="65dp"
             android:ellipsize="end"
             android:fontFamily="@font/roboto"
             android:singleLine="true"
-            android:text="2"
+            android:text="@string/payment_threshold"
             android:textColor="@color/dark_grey"
             android:textSize="@dimen/article_subheading"
-            tools:text="@string/item_desc" />
+            tools:text="@string/payment_threshold" />
 
 
         <TextView
             android:id="@+id/line_payment_eth"
-            android:layout_width="65dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/link_edit_site"
             android:layout_alignTop="@+id/line_payment"
             android:ellipsize="end"
             android:fontFamily="@font/roboto"
             android:singleLine="true"
-            android:text="2"
+            android:text="@string/tire"
+            android:textAlignment="textEnd"
             android:textColor="@color/dark_grey"
             android:textSize="@dimen/article_subheading"
-            tools:text="@string/item_desc" />
+            tools:text="@string/tire" />
 
 
         <TextView
             android:id="@+id/line_public_ip"
-            android:layout_width="268dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/link"
+            android:layout_alignStart="@+id/eth_setting"
             android:layout_marginBottom="20dp"
             android:ellipsize="end"
             android:fontFamily="@font/roboto"
             android:singleLine="true"
-            android:text="2"
+            android:text="@string/public_ip_address"
             android:textColor="@color/dark_grey"
             android:textSize="@dimen/article_subheading"
-            tools:text="@string/item_desc" />
+            tools:text="@string/public_ip_address" />
 
         <TextView
             android:id="@+id/line_public_ip2"
-            android:layout_width="65dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/link_edit_site"
             android:layout_alignTop="@+id/line_public_ip"
             android:ellipsize="end"
             android:fontFamily="@font/roboto"
             android:singleLine="true"
-            android:text="2"
+            android:text="@string/tire"
+            android:textAlignment="textEnd"
             android:textColor="@color/dark_grey"
             android:textSize="@dimen/article_subheading"
-            tools:text="@string/item_desc" />
+            tools:text="@string/tire" />
 
         <EditText
             android:id="@+id/wallet_adr"
-            android:layout_width="285dp"
+            android:layout_width="273dp"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/link"
+            android:layout_alignStart="@+id/eth_setting"
             android:layout_alignTop="@+id/buttonOk"
+            android:layout_marginStart="0dp"
             android:ems="10"
-            android:hint="Wallet address ETH"
+            android:hint="@string/wallet_address_eth"
             android:inputType="textPersonName"
             android:singleLine="false"
             android:textSize="14sp" />

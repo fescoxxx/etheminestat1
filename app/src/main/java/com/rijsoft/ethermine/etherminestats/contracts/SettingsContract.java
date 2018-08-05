@@ -1,6 +1,7 @@
 package com.rijsoft.ethermine.etherminestats.contracts;
 
 import android.content.Context;
+import android.view.View;
 
 import com.rijsoft.ethermine.etherminestats.database.DataDatabase;
 import com.rijsoft.ethermine.etherminestats.model.settings.Settings;
@@ -15,6 +16,8 @@ public interface SettingsContract {
 
         void onRefreshButtonClick();
 
+        void onClickOk(View view, String wallet);
+
         void requestDataFromServer();
 
     }
@@ -25,7 +28,7 @@ public interface SettingsContract {
 
         void hideProgress();
 
-        void setDataToShow(Settings settings);
+        void setDataToShow(Settings settings, String tagAction);
 
         void onResponseFailure(Throwable throwable);
 
@@ -34,12 +37,13 @@ public interface SettingsContract {
     interface GetSettingsIntractor {
 
         interface OnFinishedListener {
-            void onFinished(Settings settings);
+            void onFinished(Settings settings, String tagAction);
             void onFailure(Throwable t);
         }
 
         void getSettings(SettingsContract.GetSettingsIntractor.OnFinishedListener onFinishedListener,
                         DataDatabase database,
-                        Context context);
+                        Context context,
+                        String tagAction);
     }
 }

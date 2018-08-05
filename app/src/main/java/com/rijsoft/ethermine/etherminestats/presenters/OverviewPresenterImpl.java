@@ -40,12 +40,13 @@ public class OverviewPresenterImpl implements
         if(mainView != null){
             mainView.showProgress();
         }
-        if(Utils.isNetworkAvailable(context)) {
-            getDashboardIntractor.getOverview(this, mDatabase, context);
-        } else {
-            this.onFailure(new Throwable("No connection to internet"));
-            mDatabase.getCurrentStatsFromDataBase(this);
-        }
+            if(Utils.isNetworkAvailable(context)) {
+                getDashboardIntractor.getOverview(this, mDatabase, context);
+            } else {
+                this.onFailure(new Throwable("No connection to internet"));
+                mDatabase.getCurrentStatsFromDataBase(this);
+            }
+
     }
 
     @Override
@@ -54,28 +55,26 @@ public class OverviewPresenterImpl implements
         Date dateLife = new Date();
         Preferences preferences = new Preferences(context);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-        try {
-            dateLife = dateFormat.parse(preferences.getLifeTimeOverview());
-            Log.d("preferences_0", dateLife.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Log.d("preferences", preferences.getLifeTimeOverview());
+            try {
+                dateLife = dateFormat.parse(preferences.getLifeTimeOverview());
+                Log.d("preferences_0", dateLife.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.d("preferences", preferences.getLifeTimeOverview());
 
-        if (dateLife.before(new Date())) {
-            if(Utils.isNetworkAvailable(context)) {
-                getDashboardIntractor.getOverview(this, mDatabase, context);
-            } else {
-                this.onFailure(new Throwable("No connection to internet"));
+            if (dateLife.before(new Date())) {
+                if(Utils.isNetworkAvailable(context)) {
+                    getDashboardIntractor.getOverview(this, mDatabase, context);
+                } else {
+                    this.onFailure(new Throwable("No connection to internet"));
+                    mDatabase.getCurrentStatsFromDataBase(this);
+                }
+            } else  {
                 mDatabase.getCurrentStatsFromDataBase(this);
             }
-        } else  {
-            mDatabase.getCurrentStatsFromDataBase(this);
-        }
 
     }
-
-
 
     @Override
     public void onFinished(CurrentStats currentStats) {

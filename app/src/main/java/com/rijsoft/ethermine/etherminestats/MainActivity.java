@@ -32,10 +32,11 @@ public class MainActivity extends AppCompatActivity
                     PaymentsFragment.OnFragmentInteractionListener
 {
 
-    private TextView mTextMessage;
+
     private Context mContext;
     private Preferences preferences;
     private CurrentSelect currentSelect;
+    BottomNavigationView navigation;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -81,12 +82,18 @@ public class MainActivity extends AppCompatActivity
         currentSelect = CurrentSelect.OVERVEW;
         mContext = this;
         preferences = new Preferences(this);
-        preferences.setMiner("d83E0492108e809872178a325Eb784e1355780a3");
-
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        //preferences.setMiner("d83E0492108e809872178a325Eb784e1355780a3");
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        loadFragment(OverviewFragment.newInstance("1","2"));
+        if(preferences.getMiner().equals("")) {
+          //  loadFragment(SettingsFragment.newInstance("1","2"));
+            navigation.setSelectedItemId(R.id.navigation_settings);
+            currentSelect = CurrentSelect.SETTINGS;
+        } else {
+          loadFragment(OverviewFragment.newInstance("1","2"));
+            currentSelect = CurrentSelect.OVERVEW;
+        }
+
     }
 
     @Override

@@ -4,7 +4,10 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -14,17 +17,23 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rijsoft.ethermine.etherminestats.Preferences;
 import com.rijsoft.ethermine.etherminestats.R;
 import com.rijsoft.ethermine.etherminestats.contracts.SettingsContract;
 import com.rijsoft.ethermine.etherminestats.intractors.GetSettingsIntractorImpl;
 import com.rijsoft.ethermine.etherminestats.model.settings.Settings;
 import com.rijsoft.ethermine.etherminestats.presenters.SettingsPresenterImpl;
+
+import java.util.Locale;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,8 +59,16 @@ public class SettingsFragment extends Fragment implements SettingsContract.MainV
 
     private EditText wallet_adr;
     private TextView link_edit_site;
+    private TextView line_tree_email;
+    private TextView line_payment_eth;
+    private TextView line_public_ip2;
+    private CheckBox checkBoxMonitor;
 
+    private Button buttonOk;
     private OnFragmentInteractionListener mListener;
+    private BottomNavigationView navigation;
+
+    private Preferences preferences;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -112,12 +129,27 @@ public class SettingsFragment extends Fragment implements SettingsContract.MainV
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-
-        wallet_adr = (EditText) view.findViewById(R.id.wallet_adr);
-        link_edit_site = (TextView) view.findViewById(R.id.link_edit_site);
-        Spanned text = Html.fromHtml("<a href='https://ethermine.org/miners/d83E0492108e809872178a325Eb784e1355780a3/settings'>Edit on ethermine.org</a>");
+        preferences = new Preferences(getActivity());
+        buttonOk = view.findViewById(R.id.buttonOk);
+        wallet_adr = view.findViewById(R.id.wallet_adr);
+        link_edit_site = view.findViewById(R.id.link_edit_site);
+        line_tree_email = view.findViewById(R.id.line_tree_email);
+        line_payment_eth = view.findViewById(R.id.line_payment_eth);
+        line_public_ip2 = view.findViewById(R.id.line_public_ip2);
+        checkBoxMonitor = view.findViewById(R.id.checkBoxMonitor);
+        checkBoxMonitor.setEnabled(false);
+        Spanned text = Html.fromHtml("<a href='https://ethermine.org/miners/" + preferences.getMiner()+"/settings'>Edit on ethermine.org</a>");
         link_edit_site.setText(text);
-        link_edit_site.setMovementMethod(LinkMovementMethod.getInstance());      //  link_edit_site.setMovementMethod(LinkMovementMethod.getInstance());
+        link_edit_site.setMovementMethod(LinkMovementMethod.getInstance());
+
+        navigation = Objects.requireNonNull(getActivity()).findViewById(R.id.navigation);
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onClickOk(view, wallet_adr.getText().toString());
+            }
+        });
+
         return view;
     }
 
@@ -157,17 +189,63 @@ public class SettingsFragment extends Fragment implements SettingsContract.MainV
     }
 
     @Override
-    public void setDataToShow(Settings settings) {
+    public void setDataToShow(Settings settings, String tagAction) {
         this.settings = settings;
+        String payouStr;
+        Double payoutDouble;
+        String email;
+        String ip = "-";
+        Boolean monitor = false;
+        if (tagAction.equals("BTNCLICK")) {
+            loadFragment(SettingsFragment.newInstance("1","2"));
+            navigation.setSelectedItemId(R.id.navigation_overview);
+        } else
 
-        Log.d("payouts ",settings.getStatus());
+        try {
+            monitor = settings.getData().getMonitor().equals("1");
+        } catch (Exception ex) {
+            monitor = false;
+        }
+
+        try {
+            ip = settings.getData().getIp();
+        } catch (Exception ex) {
+            ip = "-";
+        }
+        
+        try {
+            email = settings.getData().getEmail();
+        } catch (Exception ex) {
+            email = "-";
+        }
+        try {
+            payoutDouble = Double.valueOf(settings.getData().getMinPayout())*0.000000000000000001;
+            payouStr = String.format(Locale.US,"%.2g%n", payoutDouble)+ " ETH";
+        }
+        catch (Exception ex) {
+            payouStr = "0.0 ETH";
+        }
+
+        line_public_ip2.setText(ip);
+        line_tree_email.setText(email);
+        line_payment_eth.setText(payouStr);
+        wallet_adr.setText(preferences.getMiner());
+        checkBoxMonitor.setChecked(monitor);
+
     }
 
     @Override
     public void onResponseFailure(Throwable throwable) {
         Toast.makeText(getActivity(),
-                "Something went wrong...Error message: " + throwable.getMessage(),
+                "Error message: " + throwable.getMessage(),
                 Toast.LENGTH_LONG).show();
+    }
+
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction ft = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fl_content, fragment);
+        ft.commit();
     }
 
     public interface OnFragmentInteractionListener {

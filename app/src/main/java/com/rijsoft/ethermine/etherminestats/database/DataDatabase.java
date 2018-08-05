@@ -186,8 +186,8 @@ public class DataDatabase extends SQLiteOpenHelper {
     }
 
     //Получение данных из БД о Settings
-    public void getSettingsFromDaraBase(SettingsContract.GetSettingsIntractor.OnFinishedListener onFinishedListener) {
-        SettingsFetcher fetcher = new SettingsFetcher(onFinishedListener,this.getWritableDatabase());
+    public void getSettingsFromDaraBase(SettingsContract.GetSettingsIntractor.OnFinishedListener onFinishedListener, String tagAction) {
+        SettingsFetcher fetcher = new SettingsFetcher(onFinishedListener,this.getWritableDatabase(), tagAction);
         fetcher.start();
     }
 

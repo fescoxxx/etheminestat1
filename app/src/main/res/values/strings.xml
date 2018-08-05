@@ -7,4 +7,16 @@
     <string name="action_settings">Settings</string>
     <string name="item_title">Title</string>
     <string name="item_desc">Descr.</string>
+    <string name="send_a_mail_if_one_of_my_workers_goes_offline">Send a mail if one of my workers goes offline</string>
+    <string name="miner_settings">Miner Settings:</string>
+    <string name="ok">OK</string>
+    <string name="edit_on_ethermine_org">Edit on ethermine.org</string>
+    <string name="email_address">Email address</string>
+    <string name="payment_threshold">Payment threshold</string>
+    <string name="tire">-</string>
+    <string name="public_ip_address">Public IP address</string>
+    <string name="eth_settings">ETH settings</string>
+    <string name="wallet_address_eth">Wallet address ETH</string>
+    <string name="BTNCLICK">BTNCLICK</string>
+    <string name="LOADFRAGMENT">LOADFRAGMENT</string>
 </resources>
