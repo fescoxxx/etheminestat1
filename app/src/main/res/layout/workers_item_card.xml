@@ -39,7 +39,7 @@
             android:scaleType="centerCrop" />
 
         <TextView
-            android:id="@+id/card_title"
+            android:id="@+id/card_title_name_worker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -50,6 +50,7 @@
             android:fontFamily="@font/roboto_medium"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/white"
+            android:textSize="18sp"
             tools:text="@string/item_title" />
 
 
@@ -57,7 +58,7 @@
             android:id="@+id/reported"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/card_title"
+            android:layout_alignStart="@+id/card_title_name_worker"
             android:layout_centerVertical="true"
             android:fontFamily="@font/roboto_medium"
             android:text="h|s"
@@ -79,7 +80,7 @@
             android:id="@+id/average"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/card_title"
+            android:layout_alignEnd="@+id/card_title_name_worker"
             android:layout_centerVertical="true"
             android:fontFamily="@font/roboto_medium"
             android:text="h|s"
@@ -90,10 +91,11 @@
             android:id="@+id/last_seen"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
-            android:layout_alignBottom="@+id/card_title"
-            android:layout_alignEnd="@+id/card_title"
+            android:layout_alignBottom="@+id/card_title_name_worker"
+            android:layout_alignEnd="@+id/card_title_name_worker"
             android:gravity="center"
-            android:text="Last Seen: 5 m" />
+            android:textColor="@color/white"
+            android:text="Last Seen: 0 m" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.rijsoft.ethermine.etherminestats.R;
+import com.rijsoft.ethermine.etherminestats.adapters.WorkersAdapter;
 import com.rijsoft.ethermine.etherminestats.contracts.WorkersContract;
 import com.rijsoft.ethermine.etherminestats.intractors.GetWorkersIntractorImpl;
 import com.rijsoft.ethermine.etherminestats.model.workers.Workers;
@@ -42,6 +45,8 @@ public class WorkersFragment extends Fragment implements WorkersContract.MainVie
     private Workers workers;
     private ProgressBar progressBar;
     private WorkersContract.presenter presenter;
+
+    private RecyclerView recyclerView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -107,7 +112,11 @@ public class WorkersFragment extends Fragment implements WorkersContract.MainVie
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_workers, container, false);
+        View view =inflater.inflate(R.layout.fragment_workers, container, false);
+        recyclerView = view.findViewById(R.id.my_recycler_view);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -148,6 +157,8 @@ public class WorkersFragment extends Fragment implements WorkersContract.MainVie
     @Override
     public void setDataToShow(Workers workers) {
         this.workers = workers;
+        WorkersAdapter adapter = new WorkersAdapter(getActivity(), workers.getData());
+        recyclerView.setAdapter(adapter);
         Log.d("payouts ",workers.getStatus());
     }
 
