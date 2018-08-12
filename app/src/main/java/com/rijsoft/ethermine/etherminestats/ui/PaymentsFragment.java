@@ -22,21 +22,11 @@ import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
 import com.rijsoft.ethermine.etherminestats.model.payouts.Payouts;
 import com.rijsoft.ethermine.etherminestats.presenters.PayoutsPresentrImpl;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PaymentsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link PaymentsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class PaymentsFragment extends Fragment implements PayoutsContract.MainView {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -47,16 +37,8 @@ public class PaymentsFragment extends Fragment implements PayoutsContract.MainVi
     private OnFragmentInteractionListener mListener;
 
     public PaymentsFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PaymentsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static PaymentsFragment newInstance(String param1, String param2) {
         PaymentsFragment fragment = new PaymentsFragment();
         Bundle args = new Bundle();
@@ -156,14 +138,7 @@ public class PaymentsFragment extends Fragment implements PayoutsContract.MainVi
                 Toast.LENGTH_LONG).show();
     }
 
-    /**
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
@@ -171,7 +146,6 @@ public class PaymentsFragment extends Fragment implements PayoutsContract.MainVi
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
-            Log.d("refreshpay","refresh_payments");
             presenter.onRefreshButtonClick();
         }
         return super.onOptionsItemSelected(item);

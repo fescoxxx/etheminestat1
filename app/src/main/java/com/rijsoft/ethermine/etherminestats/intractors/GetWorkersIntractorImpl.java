@@ -36,19 +36,32 @@ public class GetWorkersIntractorImpl implements WorkersContract.GetWorkersIntrac
             @Override
             public void onResponse(Call<Workers> call, Response<Workers> response) {
                 assert response.body() != null;
-                if (response.body().getStatus().equals("OK")) {
-                    onFinishedListener.onFinished(response.body());
-                    preferences.updateDateLife(LIFE_TIME_WORKERS);
-                    database.clearWorkers();
-                    WorkersSaveIntoDatebase task = new WorkersSaveIntoDatebase(database);
-                    task.execute(response.body());
-                }else {
+                try {
+                    if (response.body().getStatus().equals("OK")) {
+                        onFinishedListener.onFinished(response.body());
+                        preferences.updateDateLife(LIFE_TIME_WORKERS);
+                        database.clearWorkers();
+                        WorkersSaveIntoDatebase task = new WorkersSaveIntoDatebase(database);
+                        task.execute(response.body());
+                    }else {
+                        onFinishedListener.onFinished(new Workers());
+                        onFinishedListener.onFailure(new Throwable("Error loading data. Check your account settings"));
+                    }
+                } catch (Exception ex) {
+                    onFinishedListener.onFinished(new Workers());
                     onFinishedListener.onFailure(new Throwable("Error loading data. Check your account settings"));
                 }
+
             }
             @Override
             public void onFailure(Call<Workers> call, Throwable t) {
-                onFinishedListener.onFailure(t);
+                if(t.getMessage().contains("address associated with hostname")){
+                    onFinishedListener.onFinished(new Workers());
+                    onFinishedListener.onFailure(new Throwable("No connection to internet"));
+                } else {
+                    onFinishedListener.onFinished(new Workers());
+                    onFinishedListener.onFailure(new Throwable("No data"));
+                }
             }
         });
 

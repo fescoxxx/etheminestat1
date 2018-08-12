@@ -24,21 +24,11 @@ import com.rijsoft.ethermine.etherminestats.intractors.GetWorkersIntractorImpl;
 import com.rijsoft.ethermine.etherminestats.model.workers.Workers;
 import com.rijsoft.ethermine.etherminestats.presenters.WorkersPreseterImpl;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link WorkersFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link WorkersFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class WorkersFragment extends Fragment implements WorkersContract.MainView {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -51,16 +41,8 @@ public class WorkersFragment extends Fragment implements WorkersContract.MainVie
     private OnFragmentInteractionListener mListener;
 
     public WorkersFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment WorkersFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static WorkersFragment newInstance(String param1, String param2) {
         WorkersFragment fragment = new WorkersFragment();
         Bundle args = new Bundle();
@@ -119,7 +101,6 @@ public class WorkersFragment extends Fragment implements WorkersContract.MainVie
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -159,18 +140,16 @@ public class WorkersFragment extends Fragment implements WorkersContract.MainVie
         this.workers = workers;
         WorkersAdapter adapter = new WorkersAdapter(getActivity(), workers.getData());
         recyclerView.setAdapter(adapter);
-        Log.d("payouts ",workers.getStatus());
     }
 
     @Override
     public void onResponseFailure(Throwable throwable) {
         Toast.makeText(getActivity(),
-                "Something went wrong...Error message: " + throwable.getMessage(),
+                "Error message: " + throwable.getMessage(),
                 Toast.LENGTH_LONG).show();
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
@@ -178,7 +157,6 @@ public class WorkersFragment extends Fragment implements WorkersContract.MainVie
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
-            Log.d("refreshpay","refresh_workers");
             presenter.onRefreshButtonClick();
         }
         return super.onOptionsItemSelected(item);

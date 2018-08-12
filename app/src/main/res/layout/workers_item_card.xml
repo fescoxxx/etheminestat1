@@ -56,36 +56,37 @@
 
         <TextView
             android:id="@+id/reported"
-            android:layout_width="80dp"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/card_title_name_worker"
-            android:layout_centerVertical="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="37dp"
             android:fontFamily="@font/roboto_medium"
             android:text="h|s"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/current"
-            android:layout_width="80dp"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_title_backround"
+            android:layout_alignTop="@+id/reported"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/roboto_medium"
             android:text="h|s"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/average"
-            android:layout_width="80dp"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/card_title_name_worker"
-            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/reported"
             android:fontFamily="@font/roboto_medium"
             android:text="h|s"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/last_seen"
@@ -94,8 +95,8 @@
             android:layout_alignBottom="@+id/card_title_name_worker"
             android:layout_alignEnd="@+id/card_title_name_worker"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:text="Last Seen: 0 m" />
+            android:text="Last Seen: 0 m"
+            android:textColor="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,8 +119,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:background="#DF691A"
+                android:gravity="center"
                 android:text="TextView" />
 
             <TextView
@@ -131,6 +132,36 @@
                 android:gravity="center"
                 android:text="TextView" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/average_"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="Average:"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/current_"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Current:"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/reported_"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/card_title_name_worker"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="-16dp"
+            android:text="Reported:"
+            android:textAlignment="center"
+            android:textSize="10sp" />
 
 
     </RelativeLayout>
