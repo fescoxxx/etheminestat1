@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#5BC0DE"
+                android:background="@drawable/cardbackground"
                 android:gravity="center"
                 android:text="TextView" />
 
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#DF691A"
+                android:background="@drawable/cardbackground"
                 android:gravity="center"
                 android:text="TextView" />
 
@@ -47,15 +47,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#D9534F"
+                android:background="@drawable/cardbackground"
                 android:gravity="center"
+                android:textColor="#FFFFFF"
                 android:text="TextView" />
             <TextView
                 android:id="@+id/eth"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#5CB85C"
+                android:background="@drawable/cardbackground"
                 android:gravity="center"
                 android:text="TextView" />
         </LinearLayout>
