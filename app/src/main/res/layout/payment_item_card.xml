@@ -22,10 +22,11 @@
     android:layout_height="100dp"
     android:layout_gravity="center"
     android:layout_marginBottom="@dimen/tile_padding"
-    android:layout_marginTop="@dimen/tile_padding"
     android:layout_marginLeft="@dimen/null_dp"
     android:layout_marginRight="@dimen/null_dp"
-    android:foreground="?attr/selectableItemBackground">
+    android:layout_marginTop="@dimen/tile_padding"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@android:color/black">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,7 +36,7 @@
             android:id="@+id/card_title_backround"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:background="@color/reported_green"
+            android:background="#e2b75b"
             android:scaleType="centerCrop" />
 
 
@@ -50,6 +51,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="ethPay"
             android:textAlignment="viewStart"
+            android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
         <TextView
@@ -60,6 +62,7 @@
             android:layout_below="@+id/card_title_backround"
             android:text="durationPay"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="10sp" />
 
         <TextView
@@ -70,6 +73,7 @@
             android:layout_centerHorizontal="true"
             android:text="timePay"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="10sp" />
 
         <TextView
@@ -80,6 +84,7 @@
             android:layout_below="@+id/card_title_backround"
             android:text="datePay"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="10sp" />
 
         <TextView
@@ -92,7 +97,8 @@
             android:maxLines="1"
             android:paddingEnd="16dp"
             android:paddingLeft="16dp"
-            android:text="txHash" />
+            android:text="txHash"
+            android:textColor="#FFFFFF" />
 
 
     </RelativeLayout>
