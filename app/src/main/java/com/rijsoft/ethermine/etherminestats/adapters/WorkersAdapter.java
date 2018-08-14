@@ -31,7 +31,6 @@ public class WorkersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         if(viewType == TYPE_ITEM)
         {
             return new WorkersAdapterItemViewHolder(LayoutInflater.from(parent.getContext()), parent);

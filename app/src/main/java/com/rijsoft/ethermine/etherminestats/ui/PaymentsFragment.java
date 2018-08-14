@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.rijsoft.ethermine.etherminestats.R;
+import com.rijsoft.ethermine.etherminestats.adapters.PayoutsAdapter;
 import com.rijsoft.ethermine.etherminestats.contracts.PayoutsContract;
 import com.rijsoft.ethermine.etherminestats.intractors.GetPayoutsIntractorImpl;
 import com.rijsoft.ethermine.etherminestats.model.currentStats.CurrentStats;
@@ -35,6 +37,7 @@ public class PaymentsFragment extends Fragment implements PayoutsContract.MainVi
     private PayoutsContract.presenter presenter;
     
     private OnFragmentInteractionListener mListener;
+    private RecyclerView recyclerView;
 
     public PaymentsFragment() {
     }
@@ -88,7 +91,9 @@ public class PaymentsFragment extends Fragment implements PayoutsContract.MainVi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_payments, container, false);
+        View view = inflater.inflate(R.layout.fragment_payments, container, false);
+        recyclerView = view.findViewById(R.id.my_recycler_view);
+        return view;
     }
 
     public void onButtonPressed(Uri uri) {
@@ -128,7 +133,8 @@ public class PaymentsFragment extends Fragment implements PayoutsContract.MainVi
     @Override
     public void setDataToShow(Payouts payouts) {
         this.payouts = payouts;
-        Log.d("payouts ",payouts.getStatus());
+        PayoutsAdapter adapter = new PayoutsAdapter(getActivity(), payouts.getData());
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
