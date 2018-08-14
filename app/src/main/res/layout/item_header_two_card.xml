@@ -35,7 +35,7 @@
             android:id="@+id/card_title_backround"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:background="@color/reported_green"
+            android:background="#E2B75B"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -62,8 +62,9 @@
             android:layout_marginBottom="12dp"
             android:fontFamily="@font/roboto_medium"
             android:text="unpaid"
+            android:textColor="#FFFFFF"
             android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textSize="24dp" />
 
 
     </RelativeLayout>

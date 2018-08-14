@@ -24,7 +24,7 @@
                 android:id="@+id/card_title_backround_left"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:background="@color/reported_green"
+                android:background="#e2b75b"
                 android:scaleType="centerCrop" />
 
             <TextView
@@ -53,7 +53,8 @@
                 android:text="h|s"
                 android:textAlignment="center"
                 android:gravity="bottom"
-                android:textSize="18sp" />
+                android:textColor="#FFFFFF"
+                android:textSize="32dp" />
 
 
         </RelativeLayout>
@@ -78,7 +79,7 @@
                 android:id="@+id/card_title_backround_right"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:background="@color/reported_green"
+                android:background="#E2b75b"
                 android:scaleType="centerCrop" />
 
             <TextView
@@ -106,8 +107,9 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="h|s"
                 android:gravity="bottom"
+                android:textColor="#FFFFFF"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="32dp" />
 
 
         </RelativeLayout>
