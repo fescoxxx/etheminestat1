@@ -22,10 +22,11 @@
     android:layout_height="90dp"
     android:layout_gravity="center"
     android:layout_marginBottom="@dimen/tile_padding"
-    android:layout_marginTop="@dimen/tile_padding"
     android:layout_marginLeft="@dimen/null_dp"
     android:layout_marginRight="@dimen/null_dp"
-    android:foreground="?attr/selectableItemBackground">
+    android:layout_marginTop="@dimen/tile_padding"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@android:color/black">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -63,6 +64,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="average"
             android:textAlignment="viewStart"
+            android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
         <TextView
@@ -74,6 +76,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="current"
             android:textAlignment="viewStart"
+            android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
         <TextView
@@ -85,6 +88,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="reported"
             android:textAlignment="viewStart"
+            android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
         <TextView
@@ -97,6 +101,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="workers"
             android:textAlignment="viewStart"
+            android:textColor="#FFFFFF"
             android:textSize="14sp" />
 
         <TextView
@@ -108,6 +113,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="Average:"
             android:textAlignment="viewStart"
+            android:textColor="#FFFFFF"
             android:textSize="14sp" />
 
         <TextView
@@ -120,6 +126,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="Current:"
             android:textAlignment="viewStart"
+            android:textColor="#FFFFFF"
             android:textSize="14sp" />
 
         <TextView
@@ -132,6 +139,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="Reported:"
             android:textAlignment="viewStart"
+            android:textColor="#FFFFFF"
             android:textSize="14sp" />
 
         <TextView
@@ -143,6 +151,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="Workers:"
             android:textAlignment="viewStart"
+            android:textColor="#FFFFFF"
             android:textSize="14sp" />
 
 

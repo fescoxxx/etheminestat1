@@ -4,12 +4,12 @@
     android:id="@+id/Setting_view1"
     android:layout_width="match_parent"
     android:layout_height="300dp"
-    android:layout_gravity="top"
     android:layout_marginBottom="@dimen/tile_padding"
-    android:layout_marginTop="@dimen/tile_padding"
     android:layout_marginLeft="@dimen/null_dp"
     android:layout_marginRight="@dimen/null_dp"
-    android:foreground="?attr/selectableItemBackground">
+    android:layout_marginTop="@dimen/tile_padding"
+    android:background="#000000"
+    app:cardBackgroundColor="@android:color/background_dark">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:id="@+id/card_title_backround"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:background="@color/reported_green"
+            android:background="#000000"
             android:scaleType="centerCrop">
 
         </RelativeLayout>
@@ -34,9 +34,9 @@
             android:layout_marginRight="@dimen/md_keylines"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/roboto_medium"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/white"
             android:text="@string/eth_settings"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="#EBCD99"
             tools:text="@string/eth_settings" />
 
         <TextView
@@ -49,7 +49,7 @@
             android:fontFamily="@font/roboto"
             android:singleLine="true"
             android:text="@string/miner_settings"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/white"
             android:textSize="16sp"
             tools:text="@string/miner_settings" />
 
@@ -65,7 +65,7 @@
             android:singleLine="true"
             android:text="@string/send_a_mail_if_one_of_my_workers_goes_offline"
             android:textAlignment="viewStart"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/white"
             android:textSize="14sp"
             tools:text="@string/send_a_mail_if_one_of_my_workers_goes_offline" />
 
@@ -114,7 +114,7 @@
             android:singleLine="true"
             android:text="@string/email_address"
             android:textAlignment="viewStart"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/white"
             android:textSize="@dimen/article_subheading"
             tools:text="@string/email_address" />
 
@@ -129,7 +129,7 @@
             android:singleLine="true"
             android:text="@string/tire"
             android:textAlignment="textEnd"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/white"
             android:textSize="@dimen/article_subheading"
             tools:text="@string/tire" />
 
@@ -145,7 +145,7 @@
             android:fontFamily="@font/roboto"
             android:singleLine="true"
             android:text="@string/payment_threshold"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/white"
             android:textSize="@dimen/article_subheading"
             tools:text="@string/payment_threshold" />
 
@@ -161,7 +161,7 @@
             android:singleLine="true"
             android:text="@string/tire"
             android:textAlignment="textEnd"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/white"
             android:textSize="@dimen/article_subheading"
             tools:text="@string/tire" />
 
@@ -177,7 +177,7 @@
             android:fontFamily="@font/roboto"
             android:singleLine="true"
             android:text="@string/public_ip_address"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/white"
             android:textSize="@dimen/article_subheading"
             tools:text="@string/public_ip_address" />
 
@@ -192,7 +192,7 @@
             android:singleLine="true"
             android:text="@string/tire"
             android:textAlignment="textEnd"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/white"
             android:textSize="@dimen/article_subheading"
             tools:text="@string/tire" />
 
@@ -207,6 +207,7 @@
             android:hint="@string/wallet_address_eth"
             android:inputType="textPersonName"
             android:singleLine="false"
+            android:textColor="@android:color/background_light"
             android:textSize="14sp" />
 
     </RelativeLayout>
