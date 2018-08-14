@@ -58,7 +58,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             String unpaidStr = "";
 
             OverviewHeaderViewHolder header = (OverviewHeaderViewHolder)holder;
-            header.card_title_backround.setBackgroundColor(context.getResources().getColor(R.color.reported_green));
+         //   header.card_title_backround.setBackgroundColor(context.getResources().getColor(R.color.reported_green));
             header.title_card.setText("Unpaid Balance");
             try {
                 unpaid = Double.valueOf(currentStats.getData().getUnpaid())*0.000000000000000001;
@@ -99,7 +99,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     }
                     setStr = strHeshreit + addReit;
                     item.gh_name_left.setText(setStr);
-                    item.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.reported_green));
+           //         item.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.reported_green));
 
 
                     //CURRENT RIGHT
@@ -117,7 +117,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     }
                     setStr = strHeshreit + addReit;
                     item.gh_name_right.setText(setStr);
-                    item.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.reported_green));
+          //          item.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.reported_green));
                     break;
                 case 2:
                     //AVERANGE LEFT
@@ -134,7 +134,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     }
                     setStr = strHeshreit + addReit;
                     item.gh_name_left.setText(setStr);
-                    item.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.average_orange));
+         //           item.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.average_orange));
 
                     //ACTIVE WORKERS RIGHT
                     try {
@@ -143,7 +143,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         setStr = "0";
                     }
                     item.gh_name_right.setText(setStr);
-                    item.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.average_orange));
+          //          item.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.average_orange));
                     break;
                 case 3:
                     //VALID SHARES LEFT
@@ -158,7 +158,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         percent = "0(0%)";
                     }
                     item.gh_name_left.setText(percent);
-                    item.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.current_blue));
+           //         item.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.current_blue));
 
                     //STALE SHARES RIGHT
                     try {
@@ -173,7 +173,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         percent = "0(0%)";
                     }
                     item.gh_name_right.setText(percent);
-                    item.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.current_blue));
+             //       item.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.current_blue));
                     break;
                 case 4:
                     //INVALID LEFT
@@ -190,7 +190,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         percent = "0(0%)";
                     }
                     item.gh_name_left.setText(percent);
-                    item.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.workers_reg));
+             //       item.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.workers_reg));
 
                     //LAST SEEN RIGHT
 
@@ -208,7 +208,7 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     }
 
 
-                    item.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.workers_reg));
+            //        item.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.workers_reg));
                     break;
             }
             item.title_card_left.setText(mTitleOverview_1[position-1 % mTitleOverview_1.length]);
