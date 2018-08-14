@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
@@ -93,6 +94,8 @@ public class PaymentsFragment extends Fragment implements PayoutsContract.MainVi
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_payments, container, false);
         recyclerView = view.findViewById(R.id.my_recycler_view);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
         return view;
     }
 

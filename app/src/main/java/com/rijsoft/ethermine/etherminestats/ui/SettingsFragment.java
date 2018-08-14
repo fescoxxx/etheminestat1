@@ -82,7 +82,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.MainV
         }
         initializeView();
         initProgressBar();
-
+        showProgress();
         presenter = new SettingsPresenterImpl(this, new GetSettingsIntractorImpl(), getActivity());
         presenter.requestDataFromServer();
     }
