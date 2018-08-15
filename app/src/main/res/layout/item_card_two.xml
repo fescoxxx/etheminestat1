@@ -21,7 +21,7 @@
         app:cardBackgroundColor="@android:color/black">
 
         <RelativeLayout
-            android:background="@drawable/cardborder"
+            android:background="@drawable/cardborder1"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -29,7 +29,7 @@
                 android:id="@+id/card_title_backround_left"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:background="#e2b75b"
+                android:background="@drawable/cardborder"
                 android:scaleType="centerCrop" />
 
             <TextView
@@ -41,7 +41,8 @@
                 android:layout_marginLeft="@dimen/md_keylines"
                 android:layout_marginRight="@dimen/md_keylines"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/white" />
 
@@ -53,7 +54,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="26dp"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/roboto"
                 android:gravity="bottom"
                 android:text="h|s"
                 android:textAlignment="center"
@@ -79,14 +80,14 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:background="@drawable/cardborder"
+            android:background="@drawable/cardborder1"
             android:layout_height="match_parent">
 
             <RelativeLayout
                 android:id="@+id/card_title_backround_right"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:background="#E2b75b"
+                android:background="@drawable/cardborder"
                 android:scaleType="centerCrop" />
 
             <TextView
@@ -98,7 +99,8 @@
                 android:layout_marginLeft="@dimen/md_keylines"
                 android:layout_marginRight="@dimen/md_keylines"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/white" />
 
@@ -110,7 +112,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="26dp"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/roboto"
                 android:gravity="bottom"
                 android:text="h|s"
                 android:textAlignment="center"
