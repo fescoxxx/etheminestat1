@@ -1,16 +1,22 @@
 package com.rijsoft.ethermine.etherminestats;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.rijsoft.ethermine.etherminestats.model.history.History;
@@ -79,14 +85,14 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"black\">" + getString(R.string.app_name) + "</font>"));
         currentSelect = CurrentSelect.OVERVEW;
         mContext = this;
         preferences = new Preferences(this);
-        //preferences.setMiner("d83E0492108e809872178a325Eb784e1355780a3");
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         if(preferences.getMiner().equals("")) {
-          //  loadFragment(SettingsFragment.newInstance("1","2"));
             navigation.setSelectedItemId(R.id.navigation_settings);
             currentSelect = CurrentSelect.SETTINGS;
         } else {

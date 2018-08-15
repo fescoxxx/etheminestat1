@@ -89,7 +89,7 @@ public class OverviewFragment extends Fragment implements OverviewContract.MainV
     private void initProgressBar() {
         progressBar = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleLarge);
         progressBar.getIndeterminateDrawable()
-                .setColorFilter(Color.parseColor("#DF691A"),
+                .setColorFilter(Color.parseColor("#ebcd99"),
                         android.graphics.PorterDuff.Mode.MULTIPLY);
         progressBar.setIndeterminate(true);
 

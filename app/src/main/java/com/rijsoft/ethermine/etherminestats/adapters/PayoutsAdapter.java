@@ -14,9 +14,7 @@ import android.widget.TextView;
 import com.rijsoft.ethermine.etherminestats.R;
 import com.rijsoft.ethermine.etherminestats.model.payouts.Data;
 
-import java.nio.DoubleBuffer;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -26,25 +24,46 @@ public class PayoutsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     List<Data> data;
     private Context context;
 
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_ITEM = 1;
+
     public PayoutsAdapter(Context context, List<Data> data){
         this.data = data;
         this.context = context;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(isPositionHeader(position))
+            return TYPE_HEADER;
+        return TYPE_ITEM;
+    }
+
+    private boolean isPositionHeader(int position)
+    {
+        return position == 0;
     }
 
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new PayoutsItemHeaderViewHolder(LayoutInflater.from(parent.getContext()), parent);
+        if(viewType == TYPE_ITEM)
+        {
+            return new PayoutsItemViewHolder(LayoutInflater.from(parent.getContext()), parent);
+        } else if (viewType == TYPE_HEADER) {
+            return new PayoutsHeaderViewHolder(LayoutInflater.from(parent.getContext()), parent);
+        }
+        throw new RuntimeException("there is no type that matches the type " + viewType + " + make sure your using types correctly");
     }
 
 
-    public class PayoutsItemHeaderViewHolder extends RecyclerView.ViewHolder {
+    public class PayoutsItemViewHolder extends RecyclerView.ViewHolder {
 
         public TextView ethPay, datePay, timePay, durationPay, txHash;
         public RelativeLayout card_title_backround;
 
-        public PayoutsItemHeaderViewHolder(LayoutInflater inflater, ViewGroup parent){
+        public PayoutsItemViewHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.payment_item_card, parent, false));
             ethPay = (TextView)itemView.findViewById(R.id.ethPay);
             datePay = (TextView)itemView.findViewById(R.id.datePay);
@@ -53,6 +72,17 @@ public class PayoutsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             txHash = (TextView)itemView.findViewById(R.id.txHash);
         }
 
+    }
+
+    public class PayoutsHeaderViewHolder extends RecyclerView.ViewHolder{
+        public TextView title_card, unpaid;
+        public RelativeLayout card_title_backround;
+        public PayoutsHeaderViewHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.item_header_two_card, parent, false));
+            title_card = (TextView)itemView.findViewById(R.id.card_title);
+            unpaid = (TextView)itemView.findViewById(R.id.unpaid);
+            card_title_backround = (RelativeLayout)itemView.findViewById(R.id.card_title_backround);
+        }
     }
 
     private String getFormatterBeautyHeshrait(String heshreitBad) {
@@ -74,12 +104,13 @@ public class PayoutsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof PayoutsItemHeaderViewHolder) {
-            PayoutsItemHeaderViewHolder item = (PayoutsItemHeaderViewHolder) holder;
+        if(holder instanceof PayoutsItemViewHolder) {
+            int pos = position-1;
+            PayoutsItemViewHolder item = (PayoutsItemViewHolder) holder;
             String ethPayStr;
             Double ethPayDouble;
             try {
-                ethPayDouble = Double.valueOf(data.get(position).getAmount())*0.000000000000000001;
+                ethPayDouble = Double.valueOf(data.get(pos).getAmount())*0.000000000000000001;
                 ethPayStr = String.format(Locale.US,"%.5g%n", ethPayDouble)+ " ETH";
             }
             catch (Exception ex) {
@@ -88,8 +119,8 @@ public class PayoutsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             item.ethPay.setText(ethPayStr.replace("\n", ""));
 
             try {
-                Long lastSeen1 = Long.valueOf(data.get(position).getPaidOn());
-                Long lastSeen2 = Long.valueOf(data.get(position+1).getPaidOn());
+                Long lastSeen1 = Long.valueOf(data.get(pos).getPaidOn());
+                Long lastSeen2 = Long.valueOf(data.get(pos+1).getPaidOn());
                 Date time1=new java.util.Date((long)lastSeen1*1000);
                 Date time2=new java.util.Date((long)lastSeen2*1000);
                 String dateF = new SimpleDateFormat("yyyy-MM-dd").format(time1);
@@ -103,16 +134,21 @@ public class PayoutsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 item.durationPay.setText("0");
             }
             Spanned textTxHash = Html.fromHtml("<a href='https://www.etherchain.org/tx/"
-                    + data.get(position).getTxHash()+"/'>" +data.get(position).getTxHash().substring(0,40)+"...</a>");
+                    + data.get(pos).getTxHash()+"/'>" +data.get(pos).getTxHash().substring(0,40)+"...</a>");
             item.txHash.setText(textTxHash);
             item.txHash.setMovementMethod(LinkMovementMethod.getInstance());
+        }  else  if(holder instanceof PayoutsHeaderViewHolder) {
+            PayoutsHeaderViewHolder header = (PayoutsHeaderViewHolder) holder;
+            header.title_card.setText("Payments");
+            header.unpaid.setText("");
+
         }
     }
 
     @Override
     public int getItemCount() {
         try {
-            return data.size();
+            return data.size()+1;
         } catch (Exception ex) {
             return 0;
         }
