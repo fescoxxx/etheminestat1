@@ -35,19 +35,31 @@ public class GetPayoutsIntractorImpl implements PayoutsContract.GetPayoutsIntrac
         callPayouts.enqueue(new Callback<Payouts>() {
             @Override
             public void onResponse(Call<Payouts> call, Response<Payouts> response) {
-                if (response.body().getStatus().equals("OK")) {
-                    onFinishedListener.onFinished(response.body());
-                    preferences.updateDateLife(LIFE_TIME_PAYOUTS);
-                    database.clearPayouts();
-                    PayoutsSaveIntoDatabase task = new PayoutsSaveIntoDatabase(database);
-                    task.execute(response.body());
-                    } else {
+                    assert response.body() != null;
+                    try{
+                        if (response.body().getStatus().equals("OK")) {
+                            onFinishedListener.onFinished(response.body());
+                            preferences.updateDateLife(LIFE_TIME_PAYOUTS);
+                            database.clearPayouts();
+                            PayoutsSaveIntoDatabase task = new PayoutsSaveIntoDatabase(database);
+                            task.execute(response.body());
+                        } else {
+                            onFinishedListener.onFailure(new Throwable("Error loading data. Check your account settings"));
+                        }
+                    } catch (Exception ex) {
+                        onFinishedListener.onFinished(new Payouts());
                         onFinishedListener.onFailure(new Throwable("Error loading data. Check your account settings"));
                     }
                 }
             @Override
             public void onFailure(Call<Payouts> call, Throwable t) {
-                onFinishedListener.onFailure(t);
+                if(t.getMessage().contains("address associated with hostname")){
+                    onFinishedListener.onFinished(new Payouts());
+                    onFinishedListener.onFailure(new Throwable("No connection to internet"));
+                } else {
+                    onFinishedListener.onFinished(new Payouts());
+                    onFinishedListener.onFailure(new Throwable("No data"));
+                }
             }
         });
     }

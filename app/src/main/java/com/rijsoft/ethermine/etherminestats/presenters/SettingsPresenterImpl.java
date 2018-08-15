@@ -15,6 +15,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.rijsoft.ethermine.etherminestats.Preferences.LIFE_TIME_SETTINGS;
+
 public class SettingsPresenterImpl implements SettingsContract.presenter, SettingsContract.GetSettingsIntractor.OnFinishedListener {
 
 
@@ -63,6 +65,9 @@ public class SettingsPresenterImpl implements SettingsContract.presenter, Settin
         preferences.setMiner(wallet);
         tagAction = context.getString(R.string.BTNCLICK);
         requestDataFromServer();
+        preferences.setLifeTimePayouts(null);
+        preferences.setLifeTimeWorkers(null);
+        preferences.setLifeTimeOverview(null);
         Log.d("onClickOk", "onClickOk");
        // mainView.onClickResponce();
     }

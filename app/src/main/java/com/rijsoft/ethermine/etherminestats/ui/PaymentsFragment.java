@@ -143,7 +143,7 @@ public class PaymentsFragment extends Fragment implements PayoutsContract.MainVi
     @Override
     public void onResponseFailure(Throwable throwable) {
         Toast.makeText(getActivity(),
-                "Something went wrong...Error message: " + throwable.getMessage(),
+                "Error message: " + throwable.getMessage(),
                 Toast.LENGTH_LONG).show();
     }
 

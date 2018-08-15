@@ -111,6 +111,10 @@ public class PayoutsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return data.size();
+        try {
+            return data.size();
+        } catch (Exception ex) {
+            return 0;
+        }
     }
 }
