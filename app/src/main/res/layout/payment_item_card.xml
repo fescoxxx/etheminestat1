@@ -39,7 +39,7 @@
             android:layout_height="28dp"
             android:layout_below="@+id/card_title_backround"
             android:layout_toEndOf="@+id/timePay"
-            android:background="#1f1b20"
+            android:background="#353535"
             android:fontFamily="@font/roboto"
             android:gravity="center"
             android:text="durationPay"
@@ -53,7 +53,7 @@
             android:layout_height="28dp"
             android:layout_below="@+id/card_title_backround"
             android:layout_toEndOf="@+id/datePay"
-            android:background="#1f1b20"
+            android:background="#353535"
             android:fontFamily="@font/roboto"
             android:gravity="center"
             android:text="timePay"
@@ -67,7 +67,7 @@
             android:layout_height="28dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/card_title_backround"
-            android:background="#1f1b20"
+            android:background="#353535"
             android:fontFamily="@font/roboto"
             android:gravity="center"
             android:text="datePay"
@@ -81,7 +81,7 @@
             android:layout_height="28dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:background="#1f1b20"
+            android:background="#353535"
             android:fontFamily="@font/roboto"
             android:gravity="center"
             android:text="ethPay"
@@ -99,12 +99,12 @@
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:maxLines="1"
-            android:paddingEnd="14dp"
-            android:paddingLeft="14dp"
+            android:paddingEnd="10dp"
+            android:paddingLeft="10dp"
             android:text="txHash"
-            android:textColorLink="#FFFFFF"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textColorLink="#FFFFFF"
+            android:textSize="17sp" />
 
 
     </RelativeLayout>
