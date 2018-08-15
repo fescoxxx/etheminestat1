@@ -21,10 +21,6 @@
     android:layout_width="match_parent"
     android:layout_height="90dp"
     android:layout_gravity="center"
-    android:layout_marginBottom="@dimen/tile_padding"
-    android:layout_marginLeft="@dimen/null_dp"
-    android:layout_marginRight="@dimen/null_dp"
-    android:layout_marginTop="@dimen/tile_padding"
     android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="@android:color/black">
 
@@ -35,10 +31,12 @@
 
         <TextView
             android:id="@+id/card_title"
-            android:layout_width="212dp"
+            android:layout_width="228dp"
             android:layout_height="29dp"
-            android:layout_alignStart="@+id/divider"
-            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_toStartOf="@+id/unpaid"
             android:fontFamily="@font/roboto_medium"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="#E9CC98"
@@ -47,10 +45,12 @@
 
         <TextView
             android:id="@+id/unpaid"
-            android:layout_width="140dp"
+            android:layout_width="172dp"
             android:layout_height="29dp"
-            android:layout_alignEnd="@+id/divider"
-            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:text="unpaid"
@@ -62,8 +62,8 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:background="@drawable/cardbackground" />

@@ -19,7 +19,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="100dp"
     android:layout_gravity="center"
     android:layout_marginBottom="@dimen/tile_padding"
     android:layout_marginLeft="@dimen/null_dp"
@@ -35,8 +35,8 @@
         <RelativeLayout
             android:id="@+id/card_title_backround"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:background="#e2b75b"
+            android:layout_height="28dp"
+            android:background="#353535"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -50,8 +50,8 @@
             android:layout_marginTop="5dp"
             android:fontFamily="@font/roboto_medium"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/dark_grey"
-            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textSize="14dp"
             tools:text="@string/item_title" />
 
 
@@ -59,25 +59,23 @@
             android:id="@+id/reported"
             android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="37dp"
+            android:layout_centerVertical="true"
             android:fontFamily="@font/roboto_medium"
             android:text="h|s"
-            android:textColor="#FFFFFF"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/current"
             android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/reported"
-            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
             android:fontFamily="@font/roboto_medium"
             android:text="h|s"
-            android:textColor="#FFFFFF"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
         <TextView
@@ -85,28 +83,31 @@
             android:layout_width="128dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/reported"
+            android:layout_centerVertical="true"
             android:fontFamily="@font/roboto_medium"
             android:text="h|s"
-            android:textColor="#FFFFFF"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/last_seen"
-            android:layout_width="wrap_content"
-            android:layout_height="21dp"
+            android:layout_width="133dp"
+            android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/card_title_name_worker"
             android:layout_alignEnd="@+id/card_title_name_worker"
+            android:layout_marginEnd="-1dp"
             android:gravity="center"
             android:text="Last Seen: 0 m"
-            android:textColor="@color/dark_grey" />
+            android:textAlignment="textEnd"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentStart="true"
             android:orientation="horizontal">
 
             <TextView
@@ -142,32 +143,33 @@
             android:layout_width="128dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+            android:layout_alignTop="@+id/current_"
             android:text="Average:"
-            android:textColor="#FFFFFF"
             android:textAlignment="center"
+            android:textColor="#E3C694"
             android:textSize="10sp" />
 
         <TextView
             android:id="@+id/current_"
             android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_above="@+id/current"
+            android:layout_centerHorizontal="true"
             android:text="Current:"
-            android:textColor="#FFFFFF"
             android:textAlignment="center"
+            android:textColor="#E3C694"
             android:textSize="10sp" />
 
         <TextView
             android:id="@+id/reported_"
             android:layout_width="128dp"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/current"
             android:layout_alignStart="@+id/card_title_name_worker"
-            android:layout_centerVertical="true"
             android:layout_marginStart="-16dp"
             android:text="Reported:"
-            android:textColor="#FFFFFF"
             android:textAlignment="center"
+            android:textColor="#E3C694"
             android:textSize="10sp" />
 
 
