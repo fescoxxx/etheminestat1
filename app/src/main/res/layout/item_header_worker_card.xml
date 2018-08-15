@@ -19,12 +19,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="180dp"
     android:layout_gravity="center"
-    android:layout_marginBottom="@dimen/tile_padding"
-    android:layout_marginLeft="@dimen/null_dp"
-    android:layout_marginRight="@dimen/null_dp"
-    android:layout_marginTop="@dimen/tile_padding"
     android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="@android:color/black">
 
@@ -36,36 +32,48 @@
         <RelativeLayout
             android:id="@+id/card_title_backround"
             android:layout_width="match_parent"
-            android:layout_height="28dp"
+            android:layout_height="26dp"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
+            android:layout_marginBottom="63dp"
+            android:layout_marginStart="0dp"
             android:background="#353535"
             android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/card_title"
-            android:layout_width="match_parent"
+            android:layout_width="368dp"
             android:layout_height="29dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto_medium"
             android:text="Workers"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="#E9CC98"
             tools:text="Workers" />
 
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/cardbackground" />
 
         <TextView
             android:id="@+id/Total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_alignTop="@+id/card_title_backround"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="32dp"
             android:fontFamily="@font/roboto_medium"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:text="Total"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/white"
@@ -73,105 +81,124 @@
             tools:text="Total" />
 
 
-        <TextView
-            android:id="@+id/average_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/average_"
-            android:fontFamily="@font/roboto_medium"
-            android:text="average"
-            android:textAlignment="viewStart"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/current_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/current_2"
-            android:fontFamily="@font/roboto_medium"
-            android:text="current"
-            android:textAlignment="viewStart"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/reported_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/reported_"
-            android:fontFamily="@font/roboto_medium"
-            android:text="reported"
-            android:textAlignment="viewStart"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/workers_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/Total"
-            android:layout_marginBottom="0dp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="workers"
-            android:textAlignment="viewStart"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/average_"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/Total"
-            android:layout_alignTop="@+id/current_2"
-            android:fontFamily="@font/roboto_medium"
-            android:text="Average:"
-            android:textAlignment="viewStart"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/current_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/reported_"
-            android:layout_marginEnd="124dp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="Current:"
-            android:textAlignment="viewStart"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/reported_"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/workers3"
-            android:layout_marginStart="113dp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="Reported:"
-            android:textAlignment="viewStart"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp" />
+            android:layout_below="@+id/card_title_backround"
+            android:layout_marginTop="-63dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/workers3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/Total"
-            android:layout_marginBottom="26dp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="Workers:"
-            android:textAlignment="viewStart"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/workers3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Workers:"
+                    android:textAlignment="center"
+                    android:textColor="#E9CC98"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/reported_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Reported:"
+                    android:textAlignment="center"
+                    android:textColor="#E9CC98"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/current_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Current:"
+                    android:textAlignment="center"
+                    android:textColor="#E9CC98"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/average_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/Total"
+                    android:layout_alignTop="@+id/current_2"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Average:"
+                    android:textAlignment="center"
+                    android:textColor="#E9CC98"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/workers_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="workers"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/reported_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="reported"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:id="@+id/current_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="current"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/average_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="average"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp" />
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
 
 
     </RelativeLayout>
