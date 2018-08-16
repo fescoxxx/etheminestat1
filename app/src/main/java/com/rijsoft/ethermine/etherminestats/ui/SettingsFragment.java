@@ -2,6 +2,7 @@ package com.rijsoft.ethermine.etherminestats.ui;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -52,7 +54,9 @@ public class SettingsFragment extends Fragment implements SettingsContract.MainV
     private TextView line_tree_email;
     private TextView line_payment_eth;
     private TextView line_public_ip2;
-    private CheckBox checkBoxMonitor;
+
+    private ImageView iv_checkbox;
+   // private CheckBox checkBoxMonitor;
 
     private Button buttonOk;
     private OnFragmentInteractionListener mListener;
@@ -119,8 +123,11 @@ public class SettingsFragment extends Fragment implements SettingsContract.MainV
         line_tree_email = view.findViewById(R.id.line_tree_email);
         line_payment_eth = view.findViewById(R.id.line_payment_eth);
         line_public_ip2 = view.findViewById(R.id.line_public_ip2);
-        checkBoxMonitor = view.findViewById(R.id.checkBoxMonitor);
-        checkBoxMonitor.setEnabled(false);
+        iv_checkbox = (ImageView) view.findViewById(R.id.iv_checkbox);
+
+        wallet_adr.getBackground().mutate().setColorFilter(
+                getResources().getColor(android.R.color.holo_orange_light),
+                PorterDuff.Mode.SRC_ATOP);
         Spanned text = Html.fromHtml("<a href='https://ethermine.org/miners/" + preferences.getMiner()+"/settings'>Edit on ethermine.org</a>");
         link_edit_site.setText(text);
         link_edit_site.setMovementMethod(LinkMovementMethod.getInstance());
@@ -213,7 +220,12 @@ public class SettingsFragment extends Fragment implements SettingsContract.MainV
         line_tree_email.setText(email);
         line_payment_eth.setText(payouStr);
         wallet_adr.setText(preferences.getMiner());
-        checkBoxMonitor.setChecked(monitor);
+        if(monitor) {
+            iv_checkbox.setImageResource(R.drawable.ic_check_box_yen);
+        } else {
+            iv_checkbox.setImageResource(R.drawable.ic_check_box_no);
+        }
+      //  checkBoxMonitor.setChecked(monitor);
 
     }
 

@@ -74,6 +74,7 @@ public class SettingsPresenterImpl implements SettingsContract.presenter, Settin
 
     @Override
     public void requestDataFromServer() {
+        mainView.showProgress();
         mDatabase = new DataDatabase(context) ;
         Date dateLife = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");

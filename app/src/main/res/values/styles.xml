@@ -8,8 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:textColorPrimary">@color/colorPrimary</item>
-        <item name="android:textColorSecondary">@color/colorPrimary</item>
+        <item name="android:textColorSecondary">@color/white</item>
         <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textCursorDrawable">@color/colorPrimary</item>
     </style>
 
 </resources>

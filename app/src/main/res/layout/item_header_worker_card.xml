@@ -42,7 +42,7 @@
 
         <TextView
             android:id="@+id/card_title"
-            android:layout_width="368dp"
+            android:layout_width="match_parent"
             android:layout_height="29dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
