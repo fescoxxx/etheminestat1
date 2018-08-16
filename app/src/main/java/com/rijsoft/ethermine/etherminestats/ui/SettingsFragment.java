@@ -126,7 +126,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.MainV
         iv_checkbox = (ImageView) view.findViewById(R.id.iv_checkbox);
 
         wallet_adr.getBackground().mutate().setColorFilter(
-                getResources().getColor(android.R.color.holo_orange_light),
+                getResources().getColor(R.color.ebcb99),
                 PorterDuff.Mode.SRC_ATOP);
         Spanned text = Html.fromHtml("<a href='https://ethermine.org/miners/" + preferences.getMiner()+"/settings'>Edit on ethermine.org</a>");
         link_edit_site.setText(text);
