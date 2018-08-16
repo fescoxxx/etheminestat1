@@ -39,31 +39,16 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/durationPay"
+                android:id="@+id/ethPay"
                 android:layout_width="96dp"
                 android:layout_height="28dp"
-                android:layout_below="@+id/card_title_backround"
-                android:layout_toEndOf="@+id/timePay"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
                 android:layout_weight="1"
                 android:background="#353535"
                 android:fontFamily="@font/roboto"
                 android:gravity="center"
-                android:text="durationPay"
-                android:textAlignment="center"
-                android:textColor="#EBCD99"
-                android:textSize="10sp" />
-
-            <TextView
-                android:id="@+id/timePay"
-                android:layout_width="96dp"
-                android:layout_height="28dp"
-                android:layout_below="@+id/card_title_backround"
-                android:layout_toEndOf="@+id/datePay"
-                android:layout_weight="1"
-                android:background="#353535"
-                android:fontFamily="@font/roboto"
-                android:gravity="center"
-                android:text="timePay"
+                android:text="ethPay"
                 android:textAlignment="center"
                 android:textColor="#EBCD99"
                 android:textSize="10sp" />
@@ -84,16 +69,32 @@
                 android:textSize="10sp" />
 
             <TextView
-                android:id="@+id/ethPay"
+                android:id="@+id/timePay"
                 android:layout_width="96dp"
                 android:layout_height="28dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/card_title_backround"
+                android:layout_toEndOf="@+id/datePay"
                 android:layout_weight="1"
                 android:background="#353535"
                 android:fontFamily="@font/roboto"
                 android:gravity="center"
-                android:text="ethPay"
+                android:text="timePay"
+                android:textAlignment="center"
+                android:textColor="#EBCD99"
+                android:textSize="10sp" />
+
+
+            <TextView
+                android:id="@+id/durationPay"
+                android:layout_width="96dp"
+                android:layout_height="28dp"
+                android:layout_below="@+id/card_title_backround"
+                android:layout_toEndOf="@+id/timePay"
+                android:layout_weight="1"
+                android:background="#353535"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:text="durationPay"
                 android:textAlignment="center"
                 android:textColor="#EBCD99"
                 android:textSize="10sp" />
