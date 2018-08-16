@@ -162,12 +162,14 @@
                 android:textSize="14sp"
                 tools:text="@string/send_a_mail_if_one_of_my_workers_goes_offline" />
 
-            <CheckBox
-                android:id="@+id/checkBoxMonitor"
+            <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/cardbackground" />
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                app:srcCompat="@drawable/ic_refresh_black_24dp" />
+
         </LinearLayout>
 
         <TextView
@@ -251,6 +253,15 @@
             android:textColor="#ebcd99"
             android:textSize="@dimen/article_subheading"
             tools:text="@string/public_ip_address" />
+
+        <CheckBox
+            android:id="@+id/checkBoxMonitor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/line_tree"
+            android:layout_marginBottom="157dp"
+            android:background="@drawable/cardbackground" />
 
         <TextView
             android:id="@+id/line_public_ip2"
