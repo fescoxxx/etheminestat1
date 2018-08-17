@@ -102,7 +102,7 @@ public class WorkersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 long milliseconds = today.getTime() - time.getTime();
                 String setStr = "Last Seen: "+String.valueOf(milliseconds / (60 * 1000)) + " m";
                 item.last_seen.setText(setStr);
-            }catch (NullPointerException ex) {
+            }catch (Exception ex) {
                 item.last_seen.setText("-");
             }
 
