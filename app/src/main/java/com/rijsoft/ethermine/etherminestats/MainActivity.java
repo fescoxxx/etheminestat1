@@ -109,6 +109,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onPause(){
+        super.onPause();
+        navigation.setSelectedItemId(R.id.navigation_overview);
+    }
+
+    @Override
     public void onFragmentInteraction(Uri uri) {
 
     }

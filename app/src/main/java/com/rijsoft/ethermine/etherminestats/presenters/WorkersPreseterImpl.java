@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.rijsoft.ethermine.etherminestats.Preferences;
+import com.rijsoft.ethermine.etherminestats.Utils;
 import com.rijsoft.ethermine.etherminestats.contracts.WorkersContract;
 import com.rijsoft.ethermine.etherminestats.database.DataDatabase;
 import com.rijsoft.ethermine.etherminestats.model.workers.Workers;
@@ -39,7 +40,13 @@ public class WorkersPreseterImpl implements WorkersContract.presenter,
         if(mainView != null){
             mainView.showProgress();
         }
-        getWorkersIntractor.getWorkers(this, mDatabase, context);
+
+        if(Utils.isNetworkAvailable(context)) {
+            getWorkersIntractor.getWorkers(this, mDatabase, context);
+        }else {
+            this.onFailure(new Throwable("No connection to internet"));
+            mDatabase.getWorkersFromDataBase(this);
+        }
     }
 
     @Override
@@ -48,6 +55,7 @@ public class WorkersPreseterImpl implements WorkersContract.presenter,
         Date dateLife = new Date();
         Preferences preferences = new Preferences(context);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+
         try {
             dateLife = dateFormat.parse(preferences.getLifeTimeWorkers());
             Log.d("preferences_0", dateLife.toString());
@@ -57,7 +65,11 @@ public class WorkersPreseterImpl implements WorkersContract.presenter,
         Log.d("preferences", preferences.getLifeTimeWorkers());
 
         if (dateLife.before(new Date())) {
-            getWorkersIntractor.getWorkers(this, mDatabase, context);
+            if(Utils.isNetworkAvailable(context)) {
+                getWorkersIntractor.getWorkers(this, mDatabase, context);
+            } else {
+                mDatabase.getWorkersFromDataBase(this);
+            }
         } else  {
             mDatabase.getWorkersFromDataBase(this);
         }

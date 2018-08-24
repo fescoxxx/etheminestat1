@@ -67,7 +67,6 @@ public class OverviewPresenterImpl implements
                 if(Utils.isNetworkAvailable(context)) {
                     getDashboardIntractor.getOverview(this, mDatabase, context);
                 } else {
-                    this.onFailure(new Throwable("No connection to internet"));
                     mDatabase.getCurrentStatsFromDataBase(this);
                 }
             } else  {

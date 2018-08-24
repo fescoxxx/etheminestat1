@@ -93,7 +93,6 @@ public class SettingsPresenterImpl implements SettingsContract.presenter, Settin
                     getSettingsIntractor.getSettings(this, mDatabase, context, tagAction);
                 }
                 else {
-                    this.onFailure(new Throwable("No connection to internet"));
                     mDatabase.getSettingsFromDaraBase(this, tagAction);
                 }
             } else  {

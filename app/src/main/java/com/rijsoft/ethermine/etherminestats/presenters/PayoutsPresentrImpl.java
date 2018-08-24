@@ -69,7 +69,6 @@ public class PayoutsPresentrImpl implements PayoutsContract.presenter
             if(Utils.isNetworkAvailable(context)) {
                 getPayoutsIntractor.getPayouts(this, mDatabase, context);
             } else {
-                this.onFailure(new Throwable("No connection to internet"));
                 mDatabase.getPayoutsFromDataBase(this);
             }
         } else  {

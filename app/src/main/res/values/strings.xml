@@ -11,7 +11,7 @@
     <string name="miner_settings">Miner Settings:</string>
     <string name="ok">OK</string>
     <string name="edit_on_ethermine_org">Edit on ethermine.org</string>
-    <string name="email_address">Email address</string>
+    <string name="email_address">Email</string>
     <string name="payment_threshold">Payment threshold</string>
     <string name="tire">-</string>
     <string name="public_ip_address">Public IP address</string>
