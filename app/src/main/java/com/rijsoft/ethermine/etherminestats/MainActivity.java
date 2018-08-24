@@ -111,7 +111,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onPause(){
         super.onPause();
-        navigation.setSelectedItemId(R.id.navigation_overview);
+        if(!preferences.getMiner().equals("")) {
+            navigation.setSelectedItemId(R.id.navigation_overview);
+        }
     }
 
     @Override
