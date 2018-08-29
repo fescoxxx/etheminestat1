@@ -93,14 +93,12 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         } else if (heshreit*0.000001 >= 1000) {
                             strHeshreit = String.format( Locale.US, "%.2f", heshreit*0.000000001) + " GH/s";
                         }
-                    } catch (NullPointerException ex) {
+                    } catch (Exception ex) {
                         strHeshreit = "0";
                         addReit = " H/s";
                     }
                     setStr = strHeshreit + addReit;
                     item.gh_name_left.setText(setStr);
-           //         item.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.reported_green));
-
 
                     //CURRENT RIGHT
                     try {
@@ -111,13 +109,13 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             strHeshreit = String.format( Locale.US, "%.2f", heshreit*0.000000001) + " GH/s";
                         }
 
-                    } catch (NullPointerException ex) {
+                    } catch (Exception ex) {
                         strHeshreit = "0";
                         addReit = " H/s";
                     }
                     setStr = strHeshreit + addReit;
                     item.gh_name_right.setText(setStr);
-          //          item.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.reported_green));
+
                     break;
                 case 2:
                     //AVERANGE LEFT
@@ -128,24 +126,23 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         } else if (heshreit*0.000001 >= 1000) {
                             strHeshreit = String.format( Locale.US, "%.2f", heshreit*0.000000001) + " GH/s";
                         }
-                    } catch (NullPointerException ex) {
+                    } catch (Exception ex) {
                         strHeshreit = "0";
                         addReit = " H/s";
                     }
                     setStr = strHeshreit + addReit;
                     item.gh_name_left.setText(setStr);
-         //           item.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.average_orange));
 
                     //ACTIVE WORKERS RIGHT
                     try {
                         setStr = currentStats.getData().getActiveWorkers();
-                    } catch (NullPointerException ex) {
+                    } catch (Exception ex) {
                         setStr = "0";
                     }
                     item.gh_name_right.setText(setStr);
-          //          item.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.average_orange));
                     break;
                 case 3:
+
                     //VALID SHARES LEFT
                     try {
                         valid = Double.valueOf(currentStats.getData().getValidShares());
@@ -154,11 +151,10 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         summ = stales+invalid;
                         Double prcnt =  100 - ((summ / valid) *100);
                         percent = ""+currentStats.getData().getValidShares() + "("+ String.format( Locale.US, "%.2f", prcnt)+"%)";
-                    } catch (NullPointerException ex) {
+                    } catch (Exception ex) {
                         percent = "0(0%)";
                     }
                     item.gh_name_left.setText(percent);
-           //         item.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.current_blue));
 
                     //STALE SHARES RIGHT
                     try {
@@ -169,11 +165,10 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                         Double prcnt =  ((stales / summ) *100);
                         percent = currentStats.getData().getStaleShares() + "("+ String.format( Locale.US, "%.2f", prcnt)+"%)";
-                    } catch (NullPointerException ex) {
+                    } catch (Exception ex) {
                         percent = "0(0%)";
                     }
                     item.gh_name_right.setText(percent);
-             //       item.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.current_blue));
                     break;
                 case 4:
                     //INVALID LEFT
@@ -186,11 +181,10 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                         Double prcnt =  ((invalid / summ) *100);
                         percent = currentStats.getData().getInvalidShares() + "("+ String.format( Locale.US, "%.2f", prcnt)+"%)";
-                    } catch (NullPointerException ex) {
+                    } catch (Exception ex) {
                         percent = "0(0%)";
                     }
                     item.gh_name_left.setText(percent);
-             //       item.title_card_backround_left.setBackgroundColor(context.getResources().getColor(R.color.workers_reg));
 
                     //LAST SEEN RIGHT
 
@@ -202,13 +196,10 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         long milliseconds = today.getTime() - time.getTime();
                         setStr = String.valueOf(milliseconds / (60 * 1000)) + " m";
                         item.gh_name_right.setText(setStr);
-                    }catch (NullPointerException ex) {
+                    }catch (Exception ex) {
 
                         item.gh_name_right.setText("-");
                     }
-
-
-            //        item.title_card_backround_right.setBackgroundColor(context.getResources().getColor(R.color.workers_reg));
                     break;
             }
             item.title_card_left.setText(mTitleOverview_1[position-1 % mTitleOverview_1.length]);
